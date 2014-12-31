@@ -1,0 +1,27 @@
+<font size="44">
+
+    <h3>Welcome Judge</h3>
+
+    {% if message %}
+    <div class="row col-md-4">
+        <div style="color:red" class="alert alert-success">{{message}}</div>
+    </div>
+    {% endif %}
+
+    <form method="post">
+        Judge Name:
+        <select style="font-size: 44" name="judge-name">
+            {% for judge in judges %}
+            <option class="jumbotron">{{judge.name}} - {{judge.grade}}</option>
+            {% endfor %}
+        </select>
+        <br>
+        Password:
+        <input style="font-size: 44" type="password" name="password" size="6">
+        <br>
+        (For password use "sf")
+
+        <p/>
+        <input style="font-size: 44" type="submit" value="Login">
+    </form>
+</font>
