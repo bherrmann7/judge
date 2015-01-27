@@ -1,0 +1,23 @@
+
+
+<h2>Admin Page</h2>
+
+<table cellpadding="5">
+    <tr>
+        <td><th>Total count</th><th>Kindergarden</th><th>First</th><th>Second</th><th>Third</th><th>Fourth</th>
+    </tr>
+    <tr>
+        <th>Judges: <td> {{judge_stats}}
+            {% for item in judge_stats %}
+               <td>{{item.count}}/{{item.total}}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+        <th>Judgements:<td>233</td><td>99</td><td>38</td><td>90</td><td>78</td>
+    </tr>
+
+    <tr>
+        <th>Students:<td>110</td><td>13/20</td><td>24/27</td><td>33/50</td><td>17/29</td>
+    </tr>
+
+</table>

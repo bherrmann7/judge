@@ -26,7 +26,7 @@ select count(*) as judged from judgements where judge = :judge
 
 -- name: who-can-i-judge
 -- names of students who can I can judge next :judge judge
-select name from
-   (select name,count(student) jmnts from students s left join judgements j on s.name = j.student where grade = 1 group by name) x
+select name, table_assignment, grade, position from
+   (select *,count(student) jmnts from students s left join judgements j on s.name = j.student where grade = 1 group by name) x
     where jmnts<3 and name not in (select student from judgements where judge = :judge)
 

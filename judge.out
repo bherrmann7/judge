@@ -1,0 +1,13 @@
+2015-Jan-15 19:09:44 -0500 wilddog INFO [judge.handler] - 
+-=[ judge started successfully using the development profile ]=-
+2015-01-15 19:09:44.049:INFO::Logging to STDERR via org.mortbay.log.StdErrLog
+2015-01-15 19:09:44.050:INFO::jetty-6.1.25
+2015-01-15 19:09:44.058:INFO::Started SocketConnector@0.0.0.0:3000
+Started server on port 3000
+get home called.
+get home called.
+get home called.
+Login called with  Crystal H - 1   sf
+Login called with  Liam H - 3   sf
+Login called with  Stan K - 4   sf
+get home called.

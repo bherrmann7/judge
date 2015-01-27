@@ -47,9 +47,13 @@
 (defn judge-page []
   (let [
         user (noir.session/get :user)
-        student  (first (shuffle (map :name (judge.db/who-can-i-judge judge.db/db-spec user) )) )
+        student-record  (first (shuffle (judge.db/who-can-i-judge judge.db/db-spec user) ))
         ]
-    (layout/render "judge.html" {:student student })))
+    (layout/render "judge.html" student-record )))
+
+(defn admin-page []
+  (layout/render "admin.html" {:judge_stats [{:count 7 :total 17 }]} ))
+
 
 (defn judge-post [student problem research hypothesis experiment observations]
   (judge.db/insert-judgements! judge.db/db-spec student (noir.session/get :user) problem research hypothesis experiment observations   )
@@ -69,4 +73,5 @@
                  (judge-post student problem research hypothesis experiment observations))
            (GET "/" [] (home-page))
            (POST "/" [judge-name password] (login-page judge-name password))
+           (GET "/a" [] (admin-page ))
            (GET "/about" [] (about-page) ))
