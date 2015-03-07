@@ -1,23 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/screen.css" rel="stylesheet">
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Judge</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+    <h2>Admin Page</h2>
+
+    <table class="table">
+        <tr>
+            {% for header in headers %}
+            <th>{{header}}</th>
+            {% endfor %}
+        </tr>
 
 
-<h2>Admin Page</h2>
-
-<table cellpadding="5">
-    <tr>
-        <td><th>Total count</th><th>Kindergarden</th><th>First</th><th>Second</th><th>Third</th><th>Fourth</th>
-    </tr>
-    <tr>
-        <th>Judges: <td> {{judge_stats}}
-            {% for item in judge_stats %}
-               <td>{{item.count}}/{{item.total}}</td>
+        {% for row in rows %}
+        <tr>
+            <td>
+                {{row.name}}
+            </td>
+            <td>
+                {{row.count}}
+            </td>
+            <td>
+                {{row.K}}
+            </td>
+            <td>
+                {{row.first}}
+            </td>
+            <td>
+                {{row.second}}
+            </td>
+            <td>
+                {{row.third}}
+            </td>
+            <td>
+                {{row.fourth}}
+            </td>
+        </tr>
         {% endfor %}
-    </tr>
-    <tr>
-        <th>Judgements:<td>233</td><td>99</td><td>38</td><td>90</td><td>78</td>
-    </tr>
 
-    <tr>
-        <th>Students:<td>110</td><td>13/20</td><td>24/27</td><td>33/50</td><td>17/29</td>
-    </tr>
+    </table>
 
-</table>
+</div>
+
+
+<script src="/js/bootstrap.min.js"></script>
+
+</body>
+</html>

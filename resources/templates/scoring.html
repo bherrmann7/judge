@@ -1,0 +1,92 @@
+<style>
+    input[type=checkbox]
+    {
+    -ms-transform: scale(2); /* IE */
+    -moz-transform: scale(2); /* FF */
+    -webkit-transform: scale(2); /* Safari and Chrome */
+    -o-transform: scale(2); /* Opera */
+    //padding: 70px;
+    }
+
+    input[type=submit]
+    {
+    -ms-transform: scale(2); /* IE */
+    -moz-transform: scale(2); /* FF */
+    -webkit-transform: scale(2); /* Safari and Chrome */
+    -o-transform: scale(2); /* Opera */
+
+    }
+
+    select
+    {
+    -ms-transform: scale(3); /* IE */
+    -moz-transform: scale(3); /* FF */
+    -webkit-transform: scale(3); /* Safari and Chrome */
+    -o-transform: scale(3); /* Opera */
+    padding: 10px;
+    margin-left: 50px;
+    margin-top: 25px;
+    margin-bottom: 40px;
+    }
+    }
+
+    option
+    {
+    -ms-transform: scale(2); /* IE */
+    -moz-transform: scale(2); /* FF */
+    -webkit-transform: scale(2); /* Safari and Chrome */
+    -o-transform: scale(2); /* Opera */
+    padding: 20px;
+    margin: 20px;
+    }
+
+    .scoringtext
+    {
+    /* Checkbox text */
+    font-size: 130%;
+    display: inline;
+    padding: 20px;
+    }
+
+</style>
+
+
+<div style="max-width: 800px">
+<font size="50">
+
+    <h2>Judge</h2>
+
+    Table: {{table_assignment}} &nbsp;&nbsp;&nbsp;&nbsp;Position: {{position}}<br>
+    Name: {{name}} &nbsp;&nbsp;&nbsp;&nbsp; Grade: {{grade}}
+
+    <form action="/scored" method="post" >
+        <input type="hidden" name="name" value="{{name}}">
+        </input>
+        <input type="hidden" name="project-type" value="{{project-type}}">
+        </input>
+
+        <p align="right">
+            {% for criterion in criteria %}
+
+        <br>
+            {% ifequal criterion.0 ":checkbox" %}{% else %}<br>{% endifequal %}
+            <span class="scoringtext">{{criterion.1}}</span>
+            {% ifequal criterion.0 ":checkbox"  %}
+                <input type="checkbox" name="{{criterion.1}}" value="1" />
+            {% else %}
+                {% with name=criterion.1 %}
+                    {% include "templates/picker.html" %}
+                {% endwith %}
+            {% endifequal %}
+            {% endfor %}
+
+        <p>
+
+        <center>
+            <input style='font-size: 25' type="submit" value="Submit Scoring"/>
+    </center>
+    </form>
+    <p>
+
+    </p></font>
+</div>

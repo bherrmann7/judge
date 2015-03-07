@@ -21,7 +21,9 @@
   :jvm-opts ["-server"]
   :plugins [[lein-ring "0.8.13"]
             [lein-environ "1.0.0"]
-            [lein-ancient "0.5.5"]]
+           ; [lein-ancient "0.5.5"]
+            [lein-cljfmt "0.1.4"]
+            ]
   :ring {:handler judge.handler/app
          :init    judge.handler/init
          :destroy judge.handler/destroy}

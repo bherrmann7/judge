@@ -24,16 +24,16 @@
    put any initialization code here"
   []
   (timbre/set-config!
-    [:appenders :rotor]
-    {:min-level :info
-     :enabled? true
-     :async? false ; should be always false for rotor
-     :max-message-per-msecs nil
-     :fn rotor/appender-fn})
+   [:appenders :rotor]
+   {:min-level :info
+    :enabled? true
+    :async? false ; should be always false for rotor
+    :max-message-per-msecs nil
+    :fn rotor/appender-fn})
 
   (timbre/set-config!
-    [:shared-appender-config :rotor]
-    {:path "judge.log" :max-size (* 512 1024) :backlog 10})
+   [:shared-appender-config :rotor]
+   {:path "judge.log" :max-size (* 512 1024) :backlog 10})
 
   (if (env :dev) (parser/cache-off!))
   ;;start the expired session cleanup job
@@ -55,21 +55,21 @@
    :timeout-response (redirect "/")})
 
 (defn- mk-defaults
-       "set to true to enable XSS protection"
-       [xss-protection?]
-       (-> site-defaults
-           (update-in [:session] merge session-defaults)
-           (assoc-in [:security :anti-forgery] xss-protection?)))
+  "set to true to enable XSS protection"
+  [xss-protection?]
+  (-> site-defaults
+      (update-in [:session] merge session-defaults)
+      (assoc-in [:security :anti-forgery] xss-protection?)))
 
 (def app (app-handler
            ;; add your application routes here
-           [home-routes base-routes]
+          [home-routes base-routes]
            ;; add custom middleware here
-           :middleware (load-middleware)
-           :ring-defaults (mk-defaults false)
+          :middleware (load-middleware)
+          :ring-defaults (mk-defaults false)
            ;; add access rules here
-           :access-rules []
+          :access-rules []
            ;; serialize/deserialize the following data formats
            ;; available formats:
            ;; :json :json-kw :yaml :yaml-kw :edn :yaml-in-html
-           :formats [:json-kw :edn :transit-json]))
+          :formats [:json-kw :edn :transit-json]))

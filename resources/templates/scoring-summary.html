@@ -1,0 +1,52 @@
+
+<style>
+    td {   font-size: 200%;
+    display: inline;
+    padding: 10px;
+    }
+
+
+    input[type=submit]
+    {
+    -ms-transform: scale(2); /* IE */
+    -moz-transform: scale(2); /* FF */
+    -webkit-transform: scale(2); /* Safari and Chrome */
+    -o-transform: scale(2); /* Opera */
+    margin-left: 105px;
+    }
+    </style>
+
+
+<div style="max-width: 800px">
+    <font size="50">
+
+        <h2>Summary</h2>
+
+        Table: {{table_assignment}} &nbsp;&nbsp;&nbsp;&nbsp;Position: {{position}}<br>
+        Name: {{name}} &nbsp;&nbsp;&nbsp;&nbsp; Grade: {{grade}}
+        <br>
+        <br>
+
+        <form action="/score-approved" method="post">
+            <input type="hidden" name="name" value="{{name}}" />
+
+            <table>
+                {% for criterion in criteria %}
+                <tr>
+                    <input type="hidden" name="{{criterion.0}}" value="{{criterion.1}}" />
+                    <td>{{criterion.0}}</td>
+                    <td>{{criterion.1}}</td>
+                </tr>
+                {% endfor }}
+
+            </table>
+            <br>
+            Total Score: {{total-score}}
+            <br>
+
+            <br>
+            <input type="submit" value="Confirm"/>
+        </form>
+        <br>
+    </font>
+</div>

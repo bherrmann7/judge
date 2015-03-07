@@ -20,10 +20,6 @@ insert into students values ('Dana Smith', 'B', '7', 6);
 insert into students values ('William Smith', 'J', '2', 1);
 
 create table judgements ( student char(100), judge char(100),
-    problem integer,
-    research integer,
-    hypothesis integer,
-    experiment integer,
-    observations integer
+    criteria-name char(100), score integer)
 )
-
+;
