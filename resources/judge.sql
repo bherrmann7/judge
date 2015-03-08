@@ -18,11 +18,8 @@ SELECT * FROM judges
 --select * from outcomes where round = (select max(round) from outcomes where user = :user)
 --
 
--- name: insert-judgements!
-insert into judgements values (:student, :judge, :problem, :research, :hypothesis, :experiment, :observations )
-
 -- name: you-judged
-select count(*) as judged from judgements where judge = :judge
+select count(*) as judged from summary where judge = :judge
 
 -- name: who-can-i-judge
 -- names of students who can I can judge next :judge judge
@@ -58,6 +55,7 @@ AND name NOT IN
       WHERE
          judge = :judge)
 
+
 -- name: admin-summary
 select count(*),
  sum(case when grade='K' then 1 else 0 end) K,
@@ -68,6 +66,12 @@ select count(*),
 from judges
 
 -- select 'judges' name, count(*) count from judges union select 'judgements', count(*) from judgements union select 'students', count(*) from students
+
+-- name: insert-score!
+insert into judgements values (  :student, :judge, :criteria_name, :score)
+
+-- name: insert-summary!
+insert into summary values ( :student, :judge, :score)
 
 
 -- name: get-student-by-name

@@ -29,6 +29,7 @@
 
         <form action="/score-approved" method="post">
             <input type="hidden" name="name" value="{{name}}" />
+            <input type="hidden" name="project-type" value="{{project-type}}" />
 
             <table>
                 {% for criterion in criteria %}

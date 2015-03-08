@@ -45,10 +45,6 @@
                                :rows (judge.db/admin-summary judge.db/db-spec)}))
 
 
-(defn judge-post [student & args]
-  (judge.db/insert-judgements! judge.db/db-spec student (noir.session/get :user) args )
-  (noir.response/redirect "/begin"))
-
 (defn logout []
   (noir.session/clear!)
   (noir.response/redirect "/"))

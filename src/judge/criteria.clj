@@ -33,8 +33,8 @@
                                "Test reulsts in graph/chart"
                                "Conclusion"]})
 
-(defn make-checks [check-list]
-  (map #(vector :checkbox %) check-list))
+(defn make-checks [check-type check-list]
+  (map #(vector check-type %) (check-type check-list)))
 
 (defn de-scrunk
   ([items] (de-scrunk items []))
@@ -48,9 +48,9 @@
 
 (defn make-criteria [is-informational]
   (let [checklists (if is-informational informational-checklists experimental-checklists)]
-    (de-scrunk [(make-checks (:visual checklists))
+    (de-scrunk [(make-checks :visual checklists )
      [:score0-5 "Visual Appearance" "Appearence (neat, organized, visually appealing, legible, etc...)"]
-     (make-checks (:oral checklists))
+     (make-checks :oral checklists)
      [:score0-5 "Oral Clarity" "Clarity (eye contact, clear vocals, follows logical path, incorporates visual presentation)"]
      [:score0-5 "Scientific Subject" "Was scientific purpose clear?"]
      [:score0-5 "Overall Effort" "how much effort across the project lifecycle?"]])))

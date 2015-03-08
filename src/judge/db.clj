@@ -11,4 +11,9 @@
 
 (defqueries "judge.sql")
 
+(defn insert-scores! [student judge scores total]
+  (insert-summary!  db-spec student judge total )
+  (doseq [[criteria_name score] scores]
+    (insert-score!  db-spec student judge criteria_name score )
+    ))
 

@@ -28,3 +28,7 @@ insert into students values ('William Meyers', 'J', '2', 4);
 create table judgements (
    student char(100), judge char(100), criteria_name char(100), score integer
    );
+
+create table summary (
+   student char(100), judge char(100), score integer
+   );

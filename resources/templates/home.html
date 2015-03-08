@@ -12,7 +12,7 @@
         Judge Name:
         <select style="font-size: 44" name="judge-name">
             {% for judge in judges %}
-            <option class="jumbotron">{{judge.name}} - {{judge.grade}}</option>
+            <option class="jumbotron" value="{{judge.name}}">{{judge.name}} - {{judge.grade}}</option>
             {% endfor %}
         </select>
         <br>

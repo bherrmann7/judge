@@ -71,12 +71,16 @@
         <br>
             {% ifequal criterion.0 ":checkbox" %}{% else %}<br>{% endifequal %}
             <span class="scoringtext">{{criterion.1}}</span>
-            {% ifequal criterion.0 ":checkbox"  %}
-                <input type="checkbox" name="{{criterion.1}}" value="1" />
-            {% else %}
+            {% ifequal criterion.0 ":score0-5"  %}
                 {% with name=criterion.1 %}
-                    {% include "templates/picker.html" %}
+                {% include "templates/picker.html" %}
                 {% endwith %}
+            {% else %}
+                {% ifequal criterion.0 ":visual"  %}
+                    <input type="checkbox" name="Visual {{criterion.1}}" value="1" />
+                {% else %}
+                    <input type="checkbox" name="Oral {{criterion.1}}" value="1" />
+                {% endifequal %}
             {% endifequal %}
             {% endfor %}
 
