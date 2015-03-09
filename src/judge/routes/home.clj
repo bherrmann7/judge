@@ -3,6 +3,7 @@
             [noir.session]
             [noir.response]
             [judge.db]
+            [judge.admin]
             [judge.layout :as layout]
             [judge.util :as util]
             [judge.score :as score]
@@ -40,10 +41,6 @@
       (noir.response/redirect "/")
       (layout/render "begin.html" (begin-stats user)))))
 
-(defn admin-page []
-  (layout/render "admin.html" {:headers [""  "Total count" "Kindergarden" "First" "Second" "Third" "Fourth"]
-                               :rows (judge.db/admin-summary judge.db/db-spec)}))
-
 
 (defn logout []
   (noir.session/clear!)
@@ -59,6 +56,6 @@
     (score/score-post args))
   (GET "/" [] (home-page))
   (POST "/" [judge-name password] (login-page judge-name password))
-  (GET "/a" [] (admin-page))
+  (GET "/a" [] (judge.admin/admin-page))
   (GET "/about" [] (about-page))
   (route/not-found "<h1>I'm verry sorry, but page not found</h1>"))

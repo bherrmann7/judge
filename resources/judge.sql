@@ -56,8 +56,8 @@ AND name NOT IN
          judge = :judge)
 
 
--- name: admin-summary
-select count(*),
+-- name: judge-summary
+select 'Judges' as name, count(*) as count,
  sum(case when grade='K' then 1 else 0 end) K,
  sum(case when grade='1' then 1 else 0 end) First,
  sum(case when grade='2' then 1 else 0 end) Second,
