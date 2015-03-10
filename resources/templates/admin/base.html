@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/screen.css" rel="stylesheet">
+    <title>Judge</title>
+
+    <script type="text/javascript" src="/js/jquery-1.11.2.js"></script>
+    <script type="text/javascript" src="/js/jquery.tablesorter.js"></script>
+    <style>
+        table.tablesorter {
+        }
+        table.tablesorter thead tr th, table.tablesorter tfoot tr th {
+            background-color: #e6EEEE;
+        }
+        table.tablesorter thead tr .header {
+            background-image: url(/img/bg.gif);
+            background-repeat: no-repeat;
+            background-position: center right;
+            cursor: pointer;
+        }
+        table.tablesorter thead tr .headerSortUp {
+            background-image: url(/img/asc.gif);
+        }
+        table.tablesorter thead tr .headerSortDown {
+            background-image: url(/img/desc.gif);
+        }
+        table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
+            background-color: #8dbdd8;
+        }
+    </style>
+</head>
+<body>
+<!-- navbar -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{{servlet-context}}/">Judge</a>
+        </div>
+        <div class="navbar-collapse collapse ">
+            <ul class="nav navbar-nav">
+                <li class="{{/admin/home-selected}}"><a href="{{servlet-context}}/a">Home</a></li>
+                <li class="{{/admin/judges-selected}}"><a href="{{servlet-context}}/a/judges">Judges</a></li>
+                <li class="{{/admin/students-selected}}"><a href="{{servlet-context}}/a/students">Students</a></li>
+                <li class="{{/admin/judgements-selected}}"><a href="{{servlet-context}}/a/judgements">Judgements</a></li>
+                <li class="{{/admin/awards-selected}}"><a href="{{servlet-context}}/a/awards">Awards</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    {% block content %}
+    {% endblock %}
+</div>
+
+<script type="text/javascript">
+    var context = "{{servlet-context}}";
+</script>
+{% block page-scripts %}
+{% endblock %}
+</body>
+</html>
+
+
+<script>
+    $(document).ready(function () {
+                $(".tablesorter").tablesorter();
+            }
+    );
+</script>

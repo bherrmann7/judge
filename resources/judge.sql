@@ -1,25 +1,16 @@
 
+-- name: all-judges
+SELECT j.*, s.name judging FROM judges j left join students s on j.name = s.being_judged_by;
 
--- name: judges-query
-SELECT * FROM judges
+-- name: all-students
+SELECT * FROM students;
 
----- name: add-challenge!
---insert into challenges( image_name, name, gender )
---values ( :image_name, :name, "M" )
---
----- name: delete-challenges!
---delete from challenges
---
----- name: insert-outcome!
---insert into outcomes ( user, round, image_name, answer, correct, moment )
---values ( :user, :round, :image_name, :answer, :correct, :moment )
---
----- name: get-current-round-outcomes
---select * from outcomes where round = (select max(round) from outcomes where user = :user)
---
+-- name: all-summary
+select students.name, count(*) judged, group_concat(judge) judged_by, students.being_judged_by
+from students left join summary on students.name = summary.student group by students.name order by judged;
 
 -- name: you-judged
-select count(*) as judged from summary where judge = :judge
+select count(*) as judged from summary where judge = :judge;
 
 -- name: who-can-i-judge
 -- names of students who can I can judge next :judge judge
@@ -36,12 +27,13 @@ FROM
       FROM
          students s
       LEFT JOIN
-         judgements j
+         summary j
       ON
          s.name = j.student
       WHERE
          s.grade = (select grade from judges where name = :judge)
-
+         AND
+             s.being_judged_by is null
       GROUP BY
          name) x
 WHERE
@@ -51,9 +43,9 @@ AND name NOT IN
       SELECT
          student
       FROM
-         judgements
+         summary
       WHERE
-         judge = :judge)
+         judge = :judge);
 
 
 -- name: judge-summary
@@ -63,18 +55,34 @@ select 'Judges' as name, count(*) as count,
  sum(case when grade='2' then 1 else 0 end) Second,
  sum(case when grade='3' then 1 else 0 end) Third,
  sum(case when grade='4' then 1 else 0 end) Fourth
-from judges
+from judges;
 
--- select 'judges' name, count(*) count from judges union select 'judgements', count(*) from judgements union select 'students', count(*) from students
+-- name: student-summary
+select 'Students' as name, count(*) as count,
+       sum(case when grade='K' then 1 else 0 end) K,
+       sum(case when grade='1' then 1 else 0 end) First,
+       sum(case when grade='2' then 1 else 0 end) Second,
+       sum(case when grade='3' then 1 else 0 end) Third,
+       sum(case when grade='4' then 1 else 0 end) Fourth
+from students;
+
+-- name: judgement-summary
+select 'Judgements' as name, count(*) as count,
+       sum(case when grade='K' then 1 else 0 end) K,
+       sum(case when grade='1' then 1 else 0 end) First,
+       sum(case when grade='2' then 1 else 0 end) Second,
+       sum(case when grade='3' then 1 else 0 end) Third,
+       sum(case when grade='4' then 1 else 0 end) Fourth
+from summary join students on summary.student = students.name;
 
 -- name: insert-score!
-insert into judgements values (  :student, :judge, :criteria_name, :score)
+insert into judgements values (  :student, :judge, :criteria_name, :score);
 
 -- name: insert-summary!
-insert into summary values ( :student, :judge, :score)
-
+insert into summary values ( :student, :judge, :score);
 
 -- name: get-student-by-name
-select * from students where name = :name
+select * from students where name = :name;
 
-
+-- name: assign-judge-to-student!
+update students set being_judged_by=:judge where name=:student

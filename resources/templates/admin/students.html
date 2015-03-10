@@ -1,0 +1,44 @@
+{% extends "templates/admin/base.html" %}
+{% block content %}
+
+<H2>Students</H2>
+
+<br>
+<br>
+<div class="row">
+    <div class="col-md-6">
+        <table class="tablesorter table table-striped table-hover">
+            <thead>
+            <tr>
+                {% for header in headers %}
+                <th>{{header}}</th>
+                {% endfor %}
+            </tr>
+            </thead>
+            <tbody>
+            {% for row in rows %}
+            <tr>
+                <td>
+                    {{row.name}}
+                </td>
+                <td>
+                    {{row.table_assignment}}
+                </td>
+                <td>
+                    {{row.grade}}
+                </td>
+                <td>
+                    {{row.position}}
+                </td>
+                <td>
+                    {{row.being_judged_by}}
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+{% endblock %}

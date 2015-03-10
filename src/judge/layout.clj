@@ -12,6 +12,7 @@
   (render [this request]
     (content-type
      (->> (assoc params
+                  :hyper-active (keyword (s/replace template #".html" "-selected"))
                  (keyword (s/replace template #".html" "-selected")) "active"
                  :dev (env :dev)
                  :servlet-context

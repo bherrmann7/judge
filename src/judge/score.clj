@@ -8,6 +8,7 @@
   (let [user (noir.session/get :user)
         student-record (first (shuffle (judge.db/who-can-i-judge judge.db/db-spec user)))]
     ;; if in K 1 2, they have a choice of project
+    (judge.db/assign-judge-to-student! judge.db/db-spec user (:name student-record) )
     (if (some #(= (:grade student-record) %) ["K" "1" "2"])
       (layout/render "unknown-project-type.html" student-record)
       (noir.response/redirect (str "/score-by-name?name=" (java.net.URLEncoder/encode (:name student-record)) "&type=e")))))
