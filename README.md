@@ -2,9 +2,15 @@
 
 A simple web application for judging a science fair
 
-## create database using 
+#
 
- mysql and the file schema.sql
+The Judge web application was written using mysql http://mysql.com and Luminus http://www.luminusweb.net/
+
+## Create Database Using 
+
+Install mysql
+
+Creating the application schema
 
     $ mysql -u dataBaseUser -p databasePassword < schema.sql
 
