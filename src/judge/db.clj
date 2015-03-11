@@ -5,8 +5,8 @@
 (def db-spec {; :classname "org.postgresql.Driver"
               :subprotocol "mysql"
               :subname     "//localhost/judge"
-              :user        "root"                           ;(.trim (slurp "/judge-data/judge.db.user"))
-              ;  :password    (.trim (slurp "/judge-data/judge.db.pass"))
+              :user        (.trim (slurp "/judge-data/judge.db.user"))
+              :password    (.trim (slurp "/judge-data/judge.db.pass"))
               })
 
 (defqueries "judge.sql")
