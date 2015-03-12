@@ -9,6 +9,7 @@
               :password    (.trim (slurp "/judge-data/judge.db.pass"))
               })
 
+
 (defqueries "judge.sql")
 
 (defn insert-scores! [student judge scores total]

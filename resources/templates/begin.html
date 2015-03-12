@@ -1,19 +1,27 @@
-
 <font size="26">
-<p style="float: right; padding: 10px;"><a href="/logout">Logout</a></p>
-<h1>Ready to Judge</h1>
-  Logged in as: {{user}}<p>
+    <p style="float: right; padding: 10px;"><a href="{{servlet-context}}/logout">Logout</a></p>
 
-  You have judged {{you-judged}} students.
-  <p>
-  You could judge as many as {{could-judge}} more.
+    <h1>Ready to Judge</h1>
+    Logged in as: {{user}}<p>
 
-  <p>
-  {% if could-judge > 0 %}
-  <form action="/score" method="get">
-  <input style='font-size: 45' type="submit" value="Judge a Project"/>
-  </form>
-  {% endif %}
-  <p>
+    You have judged {{you-judged}} students.
 
-</p></font>
+    <p>
+        You could judge as many as {{could-judge}} more.
+
+    <p>
+
+    <form action="{{servlet-context}}/score" method="get">
+        {% if could-judge > 0 %}
+            <input style='font-size: 45' type="submit" value="Judge a Project"/>
+        {% else %}
+            {% if judging-finished %}
+                Judging for your grade has finished.
+            {% else %}
+                <input style='font-size: 45' type="submit" value="Refresh"/>
+            {% endif %}
+        {% endif %}
+    </form>
+    <p>
+
+    </p></font>
