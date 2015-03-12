@@ -58,7 +58,7 @@
     Table: {{table_assignment}} &nbsp;&nbsp;&nbsp;&nbsp;Position: {{position}}<br>
     Name: {{name}} &nbsp;&nbsp;&nbsp;&nbsp; Grade: {{grade}}
 
-    <form action="/scored" method="post" >
+    <form action="{{servlet-context}}/scored" method="post" >
         <input type="hidden" name="name" value="{{name}}">
         </input>
         <input type="hidden" name="project-type" value="{{project-type}}">

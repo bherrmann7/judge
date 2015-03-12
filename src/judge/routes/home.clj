@@ -30,10 +30,9 @@
 (defn begin-stats [user]
   {:user        user
    :you-judged  (:judged (first (judge.db/you-judged judge.db/db-spec user)))
-   :could-judge (count (judge.db/who-can-i-judge judge.db/db-spec user))})
-;:judged-once 30
-;:judged-twice 19
-;:judged-fully 5 })
+   :could-judge (count (judge.db/who-can-i-judge judge.db/db-spec user))
+   ; :judge-stats (judge.db/stats-for-grade-by-judge judge.db/db-spec user)
+})
 
 (defn begin-page []
   (let [user (noir.session/get :user)]

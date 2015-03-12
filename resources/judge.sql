@@ -6,8 +6,22 @@ SELECT j.*, s.name judging FROM judges j left join students s on j.name = s.bein
 SELECT * FROM students;
 
 -- name: all-summary
-select students.name, count(*) judged, group_concat(judge) judged_by, students.being_judged_by
-from students left join summary on students.name = summary.student group by students.name order by judged;
+SELECT
+    students.name,
+    COUNT(summary.student)  judged,
+    group_concat(judge) judged_by,
+    students.being_judged_by
+FROM
+    students
+LEFT JOIN
+    summary
+ON
+    students.name = summary.student
+GROUP BY
+    students.name
+ORDER BY
+    judged;
+
 
 -- name: you-judged
 select count(*) as judged from summary where judge = :judge;
@@ -86,3 +100,4 @@ select * from students where name = :name;
 
 -- name: assign-judge-to-student!
 update students set being_judged_by=:judge where name=:student
+
