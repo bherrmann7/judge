@@ -1,3 +1,4 @@
+
 <font size="26">
     <p style="float: right; padding: 10px;"><a href="{{servlet-context}}/logout">Logout</a></p>
 
@@ -13,15 +14,32 @@
 
     <form action="{{servlet-context}}/score" method="get">
         {% if could-judge > 0 %}
-            <input style='font-size: 45' type="submit" value="Judge a Project"/>
+        <input style='font-size: 45' type="submit" value="Judge a Project"/>
         {% else %}
-            {% if judging-finished %}
-                Judging for your grade has finished.
-            {% else %}
-                <input style='font-size: 45' type="submit" value="Refresh"/>
-            {% endif %}
+        {% if judging-finished %}
+        Judging for your grade has finished.
+        {% else %}
+        <input style='font-size: 45' type="submit" value="Refresh"/>
+        {% endif %}
         {% endif %}
     </form>
     <p>
-
+    <table  style="padding: 4px">
+        <tr>
+            <td>Students
+            <td>Checked In
+            <td>Judged 0
+            <td>Judged 1
+            <td>Judged 2
+            <td>Judged 3
+        </tr>
+        <tr>
+            <td align="center">{{stats.total_students}}
+            <td align="center">{{stats.checked_in}}
+            <td align="center">{{stats.judged0}}
+            <td align="center">{{stats.judged1}}
+            <td align="center">{{stats.judged2}}
+            <td align="center">{{stats.judged3}}
+        </tr>
+    </table>
     </p></font>

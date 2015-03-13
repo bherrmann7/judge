@@ -31,7 +31,7 @@
   {:user        user
    :you-judged  (:judged (first (judge.db/you-judged judge.db/db-spec user)))
    :could-judge (count (judge.db/who-can-i-judge judge.db/db-spec user))
-   ; :judge-stats (judge.db/stats-for-grade-by-judge judge.db/db-spec user)
+   :stats (first (judge.db/judge-stats-summary judge.db/db-spec user))
 })
 
 (defn begin-page []

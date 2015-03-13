@@ -90,7 +90,7 @@ select 'Judgements' as name, count(*) as count,
 from summary join students on summary.student = students.name;
 
 -- name: insert-score!
-insert into judgements values (  :student, :judge, :criteria_name, :score);
+insert into judgements values (:student, :judge, :criteria_name, :score);
 
 -- name: insert-summary!
 insert into summary values ( :student, :judge, :score);
@@ -99,5 +99,16 @@ insert into summary values ( :student, :judge, :score);
 select * from students where name = :name;
 
 -- name: assign-judge-to-student!
-update students set being_judged_by=:judge where name=:student
+update students set being_judged_by=:judge where name=:student;
+
+-- name: judge-stats-summary
+select count(cnts.name) total_students,
+    sum(case when checked_in IS NOT null then 1 else 0 end) checked_in,
+    sum(case when judged = 0 then 1 else 0 end) judged0,
+    sum(case when judged = 1 then 1 else 0 end) judged1,
+    sum(case when judged = 2 then 1 else 0 end) judged2,
+    sum(case when judged = 3 then 1 else 0 end) judged3
+ from (select stu.name, stu.checked_in, count(summary.student) judged from students stu left join
+   summary on summary.student = stu.name where stu.grade =
+    (select grade from judges where name = :judge_name ) group by stu.name order by judged) cnts;
 
