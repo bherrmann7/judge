@@ -1,6 +1,8 @@
 
 {% ifequal "Oral Clarity" name %}
 <input type="text" size=2 name="{{name}}" value="1.0" />
+<br>
+(1.0 thru 5.0)
 {% else %}
 {% ifequal "Overall Effort" name %}
 {% include "templates/picker15.html" %}
