@@ -33,9 +33,9 @@ insert into students values ('Keith ABC', 'J', 'K', 2, null, null);
 
 
 create table judgements (
-   student char(100), judge char(100), criteria_name char(100), score integer
+   student char(100), judge char(100), criteria_name char(100), score float
    );
 
 create table summary (
-   student char(100), judge char(100), score integer
+   student char(100), judge char(100), score float
    );

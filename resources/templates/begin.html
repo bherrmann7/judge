@@ -1,4 +1,11 @@
-
+<style>
+    TD,.cliff
+    {
+    font-family:sans-serif;
+    font-size:20pt;
+    padding: 4pt;
+    }
+</style>
 <font size="26">
     <p style="float: right; padding: 10px;"><a href="{{servlet-context}}/logout">Logout</a></p>
 
@@ -19,12 +26,14 @@
         {% if judging-finished %}
         Judging for your grade has finished.
         {% else %}
-        <input style='font-size: 45' type="submit" value="Refresh"/>
+        <a style='font-size: 45' href="{{servlet-context}}/begin">Refresh</a>
         {% endif %}
         {% endif %}
     </form>
-    <p>
-    <table  style="padding: 4px">
+    <div class="cliff">
+    Stats for grade: {{stats.grade}}
+    </div>
+    <table >
         <tr>
             <td>Students
             <td>Checked In
@@ -42,4 +51,6 @@
             <td align="center">{{stats.judged3}}
         </tr>
     </table>
-    </p></font>
+    </p>
+
+</font>

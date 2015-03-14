@@ -1,0 +1,14 @@
+
+{% ifequal "Oral Clarity" name %}
+<input type="text" size=2 name="{{name}}" value="1.0" />
+{% else %}
+{% ifequal "Overall Effort" name %}
+{% include "templates/picker15.html" %}
+{% else %}
+{% ifequal "Visual Appearance" name %}
+{% include "templates/picker20.html" %}
+{% else %}
+{% include "templates/picker.html" %}
+{% endifequal %}
+{% endifequal %}
+{% endifequal %}

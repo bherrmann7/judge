@@ -20,6 +20,10 @@
 <div style="max-width: 800px">
     <font size="50">
 
+<span style="padding:20px;float: right">
+        <a href="{{servlet-context}}/cancel?n={{name}}">Cancel</a>
+</span>
+
         <h2>Summary</h2>
 
         Table: {{table_assignment}} &nbsp;&nbsp;&nbsp;&nbsp;Position: {{position}}<br>
@@ -42,11 +46,16 @@
 
             </table>
             <br>
+            You can use the back button and adjust scores if needed.<br>
+            <br>
             Total Score: {{total-score}}
             <br>
 
             <br>
             <input type="submit" value="Confirm"/>
+            <br>
+            <br>
+            This confirmation is final.
         </form>
         <br>
     </font>

@@ -25,7 +25,7 @@
 
 
 (defn unpack-score [score-raw]
-    (. Integer parseInt
+    (. Float parseFloat
       (if (instance? String score-raw)
         score-raw
         (first score-raw))))
@@ -73,3 +73,8 @@
     (noir.response/redirect "/begin")
 
   ))
+
+(defn cancel [args]
+  (judge.db/assign-judge-to-student! judge.db/db-spec nil (:n args) )
+  (noir.response/redirect "/begin")
+  )

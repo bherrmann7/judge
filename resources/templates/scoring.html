@@ -1,5 +1,5 @@
 <style>
-    input[type=checkbox]
+    input[type=checkbox],input[type=text]
     {
     -ms-transform: scale(2); /* IE */
     -moz-transform: scale(2); /* FF */
@@ -51,45 +51,64 @@
 
 
 <div style="max-width: 800px">
-<font size="50">
+    <font size="50">
 
-    <h2>Judge</h2>
+<span style="padding:20px;float: right">
+        <a href="{{servlet-context}}/cancel?n={{name}}">Cancel</a>
+</span>
 
-    Table: {{table_assignment}} &nbsp;&nbsp;&nbsp;&nbsp;Position: {{position}}<br>
-    Name: {{name}} &nbsp;&nbsp;&nbsp;&nbsp; Grade: {{grade}}
 
-    <form action="{{servlet-context}}/scored" method="post" >
-        <input type="hidden" name="name" value="{{name}}">
-        </input>
-        <input type="hidden" name="project-type" value="{{project-type}}">
-        </input>
+        <h2>Judge</h2>
 
-        <p align="right">
-            {% for criterion in criteria %}
+        Table: {{table_assignment}} &nbsp;&nbsp;&nbsp;&nbsp;Position: {{position}}<br>
+        Name: {{name}} &nbsp;&nbsp;&nbsp;&nbsp; Grade: {{grade}}
 
-        <br>
-            {% ifequal criterion.0 ":checkbox" %}{% else %}<br>{% endifequal %}
-            <span class="scoringtext">{{criterion.1}}</span>
-            {% ifequal criterion.0 ":score0-5"  %}
-                {% with name=criterion.1 %}
-                {% include "templates/picker.html" %}
-                {% endwith %}
-            {% else %}
-                {% ifequal criterion.0 ":visual"  %}
-                    <input type="checkbox" name="Visual {{criterion.1}}" value="1" />
-                {% else %}
-                    <input type="checkbox" name="Oral {{criterion.1}}" value="1" />
+        <form action="{{servlet-context}}/scored" method="post">
+            <input type="hidden" name="name" value="{{name}}">
+            </input>
+            <input type="hidden" name="project-type" value="{{project-type}}">
+            </input>
+
+            <p align="right">
+                {% for criterion in criteria %}
+
+                <br>
+                {% ifequal criterion.0 ":checkbox" %}
+                {% else %}<br>
                 {% endifequal %}
-            {% endifequal %}
-            {% endfor %}
 
+                <span class="scoringtext">
+
+                        {% ifequal criterion.0 ":visual" %}
+                           Visual
+                        {% else %}
+                            {% ifequal criterion.0 ":oral" %}
+                                Oral
+                            {% endifequal %}
+                        {% endifequal %}
+
+                    {{criterion.1}}
+                </span>
+                {% ifequal criterion.0 ":score0-5" %}
+                {% with name=criterion.1 %}
+                    {% include "templates/picker1.html" %}
+                {% endwith %}
+                {% else %}
+                {% ifequal criterion.0 ":visual" %}
+                <input type="checkbox" name="Visual {{criterion.1}}" value="1"/>
+                {% else %}
+                <input type="checkbox" name="Oral {{criterion.1}}" value="1"/>
+                {% endifequal %}
+                {% endifequal %}
+                {% endfor %}
+
+            <p>
+
+            <center>
+                <input style='font-size: 25' type="submit" value="Submit Scoring"/>
+            </center>
+        </form>
         <p>
 
-        <center>
-            <input style='font-size: 25' type="submit" value="Submit Scoring"/>
-    </center>
-    </form>
-    <p>
-
-    </p></font>
+        </p></font>
 </div>
