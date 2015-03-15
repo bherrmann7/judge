@@ -1,5 +1,45 @@
+<script>
+
+    function is_valid_range( input_control, error_span, upper_limit) {
+        if (input_control.value.trim().length > 0 && input_control.value >= 0 && input_control.value <= upper_limit ){
+            document.getElementById(error_span).className="";
+            return true;
+         } else {
+            input_control.focus();
+            document.getElementById(error_span).className="error";
+            input_control.scrollIntoView(true);
+            return false;
+        }
+    }
+
+    function get(x){
+        return document.getElementsByName(x)[0];
+    }
+
+    function validate_inputs(){
+        if (
+        is_valid_range(get('Visual Appearance'),'Visual Appearance-error', 5.0)
+            &&
+        is_valid_range(get('Oral Clarity'),'Oral Clarity-error', 5.0)
+            &&
+            is_valid_range(get('Scientific Subject'),'Scientific Subject-error', 5.0)
+            &&
+            is_valid_range(get('Overall Effort'),'Overall Effort-error', 1.5)
+            ) {
+               document.getElementById('scoring').submit();
+            }
+    }
+
+
+
+</script>
+
 <style>
-    input[type=checkbox],input[type=text]
+    .error {
+    color:red;
+    }
+
+    input[type=checkbox]
     {
     -ms-transform: scale(2); /* IE */
     -moz-transform: scale(2); /* FF */
@@ -14,6 +54,15 @@
     -moz-transform: scale(2); /* FF */
     -webkit-transform: scale(2); /* Safari and Chrome */
     -o-transform: scale(2); /* Opera */
+    }
+
+    inputxxx[type=text]
+    {
+    -ms-transform: scale(2); /* IE */
+    -moz-transform: scale(2); /* FF */
+    -o-transform: scale(2); /* Opera */
+    -webkit-transform: scale(5); /* Safari and Chrome */
+    font-size: 34pt
     }
 
     select
@@ -50,7 +99,7 @@
 </style>
 
 
-<div style="max-width: 800px">
+<div style="max-width: 900px">
     <font size="50">
 
 <span style="padding:20px;float: right">
@@ -60,19 +109,18 @@
 
         <h2>Judge</h2>
 
-        Table: {{table_assignment}} &nbsp;&nbsp;&nbsp;&nbsp;Position: {{position}}<br>
-        Name: {{name}} &nbsp;&nbsp;&nbsp;&nbsp; Grade: {{grade}}
+        <form id="scoring" action="{{servlet-context}}/scored" method="post" onsubmit="return false;">
 
-        <form action="{{servlet-context}}/scored" method="post">
+            Table: {{table_assignment}} &nbsp;&nbsp;&nbsp;&nbsp;Position: {{position}}&nbsp;&nbsp;Grade: {{grade}}<br>
+            Name: {{name}}
             <input type="hidden" name="name" value="{{name}}">
             </input>
             <input type="hidden" name="project-type" value="{{project-type}}">
             </input>
 
-            <p align="right">
+            <div align="right">
                 {% for criterion in criteria %}
 
-                <br>
                 {% ifequal criterion.0 ":checkbox" %}
                 {% else %}<br>
                 {% endifequal %}
@@ -89,9 +137,14 @@
 
                     {{criterion.1}}
                 </span>
+                {% ifequal criterion.0 ":score1-1.5" %}
+                {% with name=criterion.1 %}
+                {% include "templates/picker1.html" %}
+                {% endwith %}
+                {% else %}
                 {% ifequal criterion.0 ":score0-5" %}
                 {% with name=criterion.1 %}
-                    {% include "templates/picker1.html" %}
+                {% include "templates/picker1.html" %}
                 {% endwith %}
                 {% else %}
                 {% ifequal criterion.0 ":visual" %}
@@ -100,15 +153,20 @@
                 <input type="checkbox" name="Oral {{criterion.1}}" value="1"/>
                 {% endifequal %}
                 {% endifequal %}
+                {% endifequal %}
+                <br>
+
                 {% endfor %}
+                <p>
 
-            <p>
+                <center>
+                    <input style='font-size: 25' type="submit" onclick="return validate_inputs();"
+                           value="Submit Scoring"/>
+                </center>
 
-            <center>
-                <input style='font-size: 25' type="submit" value="Submit Scoring"/>
-            </center>
+                <p>
+                </p>
+            </div>
         </form>
-        <p>
-
-        </p></font>
+    </font>
 </div>

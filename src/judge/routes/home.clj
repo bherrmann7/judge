@@ -12,7 +12,7 @@
 (defn home-page []
   (println "get home called.")
   (layout/render
-    "home.html" {:message (noir.session/flash-get :message) :judges (judge.db/all-judges judge.db/db-spec)}))
+   "home.html" {:message (noir.session/flash-get :message) :judges (judge.db/all-judges judge.db/db-spec)}))
 
 (defn login-page [judge-name password]
   (println "Login called with " judge-name " " password)
@@ -31,8 +31,7 @@
   {:user user
    :you-judged (:judged (first (judge.db/you-judged judge.db/db-spec user)))
    :could-judge (count (judge.db/who-can-i-judge judge.db/db-spec user))
-   :stats (first (judge.db/judge-stats-summary judge.db/db-spec user))
-   })
+   :stats (first (judge.db/judge-stats-summary judge.db/db-spec user))})
 
 (defn begin-page []
   (let [user (noir.session/get :user)]

@@ -1,16 +1,18 @@
 
-{% ifequal "Oral Clarity" name %}
-<input type="text" size=2 name="{{name}}" value="1.0" />
-<br>
-(1.0 thru 5.0)
-{% else %}
 {% ifequal "Overall Effort" name %}
-{% include "templates/picker15.html" %}
+
+<input style="font-size: 40pt; width: 140pt;" onchange="is_valid_range(this,'{{name}}-error', 1.5)" name="{{name}}" type="number" step="0.1">
+<br>
+<span id="{{name}}-error"  >
+(Multiplier - between 1.0 and <b>1.5</b>)
+</span>
+
 {% else %}
-{% ifequal "Visual Appearance" name %}
-{% include "templates/picker20.html" %}
-{% else %}
-{% include "templates/picker.html" %}
-{% endifequal %}
-{% endifequal %}
+
+<input style="font-size: 40pt; width: 140pt;" onchange="is_valid_range(this,'{{name}}-error', 5.0)" name="{{name}}" type="number" step="0.01">
+<br>
+<span id="{{name}}-error" >
+(between 0.0 and 5.0)
+</span>
+
 {% endifequal %}
