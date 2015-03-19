@@ -6,7 +6,7 @@
                                         "Topic/Question"
                                         "Pictures / Models / Collections"
                                         "Conclusion"]
-                               :oral ["Oral Topic/Question"
+                               :oral ["Topic/Question"
                                       "Written Information Explanation"
                                       "Pictures / Models / Collections"
                                       "Conclusion"]})
