@@ -15,26 +15,21 @@
 (deftest test-app
 
   (testing "Validate visual information checks"
-    (let [[total-score summary] (judge.score/compute-final-summary [
-                                                                     ["Overall Effort" 1]
+    (let [[total-score summary] (judge.score/compute-final-summary [["Overall Effort" 1]
 
-                                                                     ["Visual Title, Name, School, Grade" 1.0]
-                                                                     ["Visual 2 Resources" 1]
-                                                                     ["Visual Topic / questions explanation" 1]
-                                                                     ["Visual Pictures / models / collections" 1]
-                                                                     ["Visual Conclusion" 1]
-                                                                     ] true)]
+                                                                    ["Visual Title, Name, School, Grade" 1.0]
+                                                                    ["Visual 2 Resources" 1]
+                                                                    ["Visual Topic / questions explanation" 1]
+                                                                    ["Visual Pictures / models / collections" 1]
+                                                                    ["Visual Conclusion" 1]] true)]
       (is (= 20.0 total-score))))
 
   (testing "Validate oral information checks"
-    (let [[total-score summary] (judge.score/compute-final-summary [
-                                                                     ["Overall Effort" 1]
+    (let [[total-score summary] (judge.score/compute-final-summary [["Overall Effort" 1]
 
-                                                                     ["Oral Written information explanation" 1]
-                                                                     ["Oral Pictures / models / collections" 1]
-                                                                     ["Oral Conclusion" 1]
-
-                                                                     ] true)]
+                                                                    ["Oral Written information explanation" 1]
+                                                                    ["Oral Pictures / models / collections" 1]
+                                                                    ["Oral Conclusion" 1]] true)]
       (is (= 20.0 total-score))))
 
   (testing "nothing * 1.5 = 0"

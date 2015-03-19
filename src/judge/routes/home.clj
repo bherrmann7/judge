@@ -33,8 +33,7 @@
 
 (defn begin-page []
   (let [user (noir.session/get :user)
-        not-used (judge.db/unassign-judge-from-any-students! judge.db/db-spec user)
-        ]
+        not-used (judge.db/unassign-judge-from-any-students! judge.db/db-spec user)]
     (if (nil? user)
       (noir.response/redirect "/")
       (layout/render "begin.html" (begin-stats user)))))

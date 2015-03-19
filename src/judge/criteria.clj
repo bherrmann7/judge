@@ -3,32 +3,31 @@
 
 (def informational-checklists {:visual ["Title, Name, School, Grade"
                                         "Resources (2 minimum)"
-                                        "Topic/question"
-                                        "Pictures / models / collections"
+                                        "Topic/Question"
+                                        "Pictures / Models / Collections"
                                         "Conclusion"]
-                               :oral [
-                                       "Oral Topic/question"
-                                       "Written information explanation"
-                                       "Pictures / models / collections"
-                                       "Conclusion"]})
+                               :oral ["Oral Topic/Question"
+                                      "Written Information Explanation"
+                                      "Pictures / Models / Collections"
+                                      "Conclusion"]})
 
 (def experimental-checklists {:visual ["Name, School, Grade"
                                        "Resources (2 minimum)"
                                        "Title and Purpose"
-                                       "Hypothesis / prediction"
-                                       "Test setup"
-                                       "Test procedure"
+                                       "Hypothesis / Prediction"
+                                       "Test Setup"
+                                       "Test Procedure"
                                        "Test Variables"
-                                       "Test data"
-                                       "Test results in graph/chart"
+                                       "Test Data"
+                                       "Test Results in Graph/Chart"
                                        "Conclusion"]
-                              :oral ["Purpose"
-                                     "Hypothesis / prediction"
-                                     "Test setup"
-                                     "Test procedure"
-                                     "Variables"
-                                     "Test data"
-                                     "Test results in graph/chart"
+                              :oral ["Title and Purpose"
+                                     "Hypothesis / Prediction"
+                                     "Test Setup"
+                                     "Test Procedure"
+                                     "Test Variables"
+                                     "Test Data"
+                                     "Test Results in Graph/Chart"
                                      "Conclusion"]})
 
 (defn make-checks [check-type check-list]
@@ -37,11 +36,11 @@
 (defn de-scrunk
   ([items] (de-scrunk items []))
   ([items flat]
-    (let [f (first items)]
-      (if (nil? f)
-        flat
-        (if (seq? f) (de-scrunk (rest items) (into flat f))
-          (de-scrunk (rest items) (conj flat f)))))))
+   (let [f (first items)]
+     (if (nil? f)
+       flat
+       (if (seq? f) (de-scrunk (rest items) (into flat f))
+           (de-scrunk (rest items) (conj flat f)))))))
 
 
 (defn make-criteria [is-informational]

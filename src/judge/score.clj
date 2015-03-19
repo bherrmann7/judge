@@ -32,9 +32,9 @@
 
 (defn unpack-score [score-raw]
   (. Float parseFloat
-    (if (instance? String score-raw)
-      score-raw
-      (first score-raw))))
+     (if (instance? String score-raw)
+       score-raw
+       (first score-raw))))
 
 (defn score-entry [score-name scores]
   (let [matching-entry (first (filter #(= score-name (first %)) scores))]
@@ -73,8 +73,7 @@
   (let [check-criteria (filter #(= key (first %)) criteria)
         check-names (map #(str (clojure.string/capitalize (name key)) " " (second %)) check-criteria)
         scores-extracted (map #(extract-score % scores) check-names)
-        score (* 20 (/ (reduce + scores-extracted) (count scores-extracted)))
-      ]
+        score (* 20 (/ (reduce + scores-extracted) (count scores-extracted)))]
     score))
 
 (defn compute-final-summary [scores is-informational]
@@ -115,11 +114,11 @@
         student-record (first (judge.db/get-student-by-name judge.db/db-spec (:name args)))]
     (if (= judge (:being_judged_by student-record))
       (doall
-        (judge.db/insert-scores! (:name args) judge score-list total-score)
-        (noir.response/redirect "/begin"))
-       (layout/render "scoring-error.html"))))
+       (judge.db/insert-scores! (:name args) judge score-list total-score)
+       (noir.response/redirect "/begin"))
+      (layout/render "scoring-error.html"))))
 
 
-  (defn cancel [args]
-    (judge.db/assign-judge-to-student! judge.db/db-spec nil (:n args))
-    (noir.response/redirect "/begin"))
+(defn cancel [args]
+  (judge.db/assign-judge-to-student! judge.db/db-spec nil (:n args))
+  (noir.response/redirect "/begin"))
