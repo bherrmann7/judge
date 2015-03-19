@@ -15,7 +15,7 @@
                                         :rows   (judge.db/all-judges judge.db/db-spec)}))
 
 (defn students-page []
-  (layout/render "/admin/students.html" {:headers ["Name" "Table Assignment" "Grade" "Position" "Being Judged By"]
+  (layout/render "/admin/students.html" {:headers ["Name" "Name" "Table Assignment" "Grade" "Position" "Checked In" "Being Judged By"]
                                          :rows (judge.db/all-students judge.db/db-spec)}))
 
 (defn judgements-page []

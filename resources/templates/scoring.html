@@ -17,14 +17,14 @@
     }
 
     function validate_inputs(){
-        if (
-        is_valid_range(get('Visual Appearance'),'Visual Appearance-error', 5.0)
-            &&
-        is_valid_range(get('Oral Clarity'),'Oral Clarity-error', 5.0)
-            &&
-            is_valid_range(get('Scientific Subject'),'Scientific Subject-error', 5.0)
-            &&
-            is_valid_range(get('Overall Effort'),'Overall Effort-error', 1.5)
+        if ( true
+//        is_valid_range(get('Visual Appearance'),'Visual Appearance-error', 20.0)
+//            &&
+//        is_valid_range(get('Oral Clarity'),'Oral Clarity-error', 20.0)
+//            &&
+//            is_valid_range(get('Scientific Subject'),'Scientific Subject-error', 20.0)
+//            &&
+//            is_valid_range(get('Overall Effort'),'Overall Effort-error', 1.5)
             ) {
                document.getElementById('scoring').submit();
             }
@@ -111,12 +111,23 @@
 
         <form id="scoring" action="{{servlet-context}}/scored" method="post" onsubmit="return false;">
 
-            Table: {{table_assignment}} &nbsp;&nbsp;&nbsp;&nbsp;Position: {{position}}&nbsp;&nbsp;Grade: {{grade}}<br>
+            Table: {{table_assignment}} &nbsp;&nbsp;Position: {{position}}&nbsp;&nbsp;Grade: {{grade}}
+            &nbsp;&nbsp;Judged: {{judgements}}<br>
             Name: {{name}}
+            {% if partner %}
+            <br>
+            Name: {{partner}}
+            {% endif %}
+            {% if judgements = 2 %}
+            <div style="background-color:yellow; color: blue"><center>Bring award{% if partner %}s{% endif %}</center></div>
+            {% endif %}
+
+
             <input type="hidden" name="name" value="{{name}}">
             </input>
             <input type="hidden" name="project-type" value="{{project-type}}">
             </input>
+
 
             <div align="right">
                 {% for criterion in criteria %}
@@ -142,9 +153,9 @@
                 {% include "templates/picker1.html" %}
                 {% endwith %}
                 {% else %}
-                {% ifequal criterion.0 ":score0-5" %}
+                {% ifequal criterion.0 ":score0-20" %}
                 {% with name=criterion.1 %}
-                {% include "templates/picker1.html" %}
+                {% include "templates/picker20.html" %}
                 {% endwith %}
                 {% else %}
                 {% ifequal criterion.0 ":visual" %}

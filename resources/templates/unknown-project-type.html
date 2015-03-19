@@ -7,9 +7,14 @@
 
     <h2>Judge</h2>
 
-  Table: {{table_assignment}}  &nbsp;&nbsp;&nbsp;&nbsp;Position: {{position}}<br>
-  Name: {{name}}  &nbsp;&nbsp;&nbsp;&nbsp; Grade: {{grade}}
-<p></p>
+  Table: {{table_assignment}}  &nbsp;&nbspPosition: {{position}} &nbsp;&nbsp; Grade: {{grade}} &nbsp;&nbsp;Judged: {{judgements}}<br>
+  Name: {{name}}<br>
+    {% if partner %}
+    <br>
+    Name: {{partner}}
+    {% endif %}
+
+    <p></p>
     What is the project type?
     <p></p>
     &nbsp;

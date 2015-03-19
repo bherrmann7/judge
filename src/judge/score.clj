@@ -3,18 +3,22 @@
             judge.criteria
             judge.db
             clojure.string
+            clojure.pprint
             noir.session
             noir.response
             [judge.layout :as layout]))
 
 (defn scoring-page []
   (let [user (noir.session/get :user)
+        not-used (judge.db/unassign-judge-from-any-students! judge.db/db-spec user)
         student-record (first (shuffle (judge.db/who-can-i-judge judge.db/db-spec user)))]
-    ;; if in K 1 2, they have a choice of project
     (judge.db/assign-judge-to-student! judge.db/db-spec user (:name student-record))
+    ;; if in K 1 2, they have a choice of project
     (if (some #(= (:grade student-record) %) ["K" "1" "2"])
       (layout/render "unknown-project-type.html" student-record)
-      (noir.response/redirect (str "/score-by-name?name=" (java.net.URLEncoder/encode (:name student-record)) "&type=e")))))
+      (layout/render "scoring.html" (conj {:project-type :experimental :criteria (judge.criteria/make-criteria false)} student-record)))))
+
+;      (noir.response/redirect (str "/score-by-name?name=" (java.net.URLEncoder/encode (:name student-record)) "&type=e")))))
 
 
 (defn scoring-page-by-name [name type]
@@ -22,15 +26,15 @@
         student-record (first (judge.db/get-student-by-name judge.db/db-spec name))
         project-type (if (= "i" type) :informational :experimental)
         criteria (judge.criteria/make-criteria (= "i" type))]
-    (clojure.pprint/pprint criteria)
+    ;  (clojure.pprint/pprint criteria)
     (layout/render "scoring.html" (conj {:project-type project-type :criteria criteria} student-record))))
 
 
 (defn unpack-score [score-raw]
   (. Float parseFloat
-     (if (instance? String score-raw)
-       score-raw
-       (first score-raw))))
+    (if (instance? String score-raw)
+      score-raw
+      (first score-raw))))
 
 (defn score-entry [score-name scores]
   (let [matching-entry (first (filter #(= score-name (first %)) scores))]
@@ -60,41 +64,35 @@
 
 (defn extract-score [key scores]
   (let [found-score (second (first (filter #(= key (first %)) scores)))]
-
     (if (nil? found-score)
       0.0
       found-score)))
 
-; Checks are strange.  The total checks for a section can only add up to 5 points.
-; so each missing check counts against you, but you cant go negative.  So if out of 10 checked criteria
-; you are missing two things, you get a score of 3.    If you are missing 7 things, you get a 0.
+; Checks are strange.  The total checks for a section add up to 20 points.
 (defn extract-checks [key criteria scores]
   (let [check-criteria (filter #(= key (first %)) criteria)
         check-names (map #(str (clojure.string/capitalize (name key)) " " (second %)) check-criteria)
-        scores (map #(extract-score % scores) check-names)
-        scores-missing (count (filter #(= 0.0 %) scores))
-        scores-raw (- 5 scores-missing)
-        score (if (< 0 scores-raw)  scores-raw 0)]
-    ;(prn "scores" key (count scores) scores scores-missing scores-raw score)
+        scores-extracted (map #(extract-score % scores) check-names)
+        score (* 20 (/ (reduce + scores-extracted) (count scores-extracted)))
+      ]
     score))
 
 (defn compute-final-summary [scores is-informational]
   (let [criteria (judge.criteria/make-criteria is-informational)
         visual-checks (extract-checks :visual criteria scores)
-        visual-appearance (extract-score "Visual Appearance" scores)
+        visual-appearance (extract-score "Visual Score" scores)
         oral-checks (extract-checks :oral criteria scores)
-        oral-clarity (extract-score "Oral Clarity" scores)
-        scientific-subject (extract-score "Scientific Subject" scores)
-        overall-effort (extract-score "Overall Effort" scores)
+        oral-clarity (extract-score "Oral Score" scores)
+        scientific-subject (extract-score "Scientific Subject Score" scores)
+        overall-effort (extract-score "Overall Effort Multiplier" scores)
 
         total-score (* overall-effort (+ visual-checks visual-appearance oral-checks oral-clarity scientific-subject))
         scores [["Visual Checks" visual-checks]
-                ["Visual Appearance" visual-appearance]
+                ["Visual Score" visual-appearance]
                 ["Oral Checks" oral-checks]
-                ["Oral Clarity" oral-clarity]
-                ["Scientific Subject" scientific-subject]
-                ["Overall Effort" overall-effort]]]
-
+                ["Oral Score" oral-clarity]
+                ["Scientific Subject Score" scientific-subject]
+                ["Overall Effort Multiplier" overall-effort]]]
     ;(println "total-score" total-score "from scores" scores)
     [total-score scores]))
 
@@ -113,10 +111,15 @@
         scores (dissoc args :name :project-type)
         score-list (into [] (map #(vector (name (first %)) (unpack-score (second %))) scores))
         just-scores (map #(second %) score-list)
-        total-score (reduce + just-scores)]
-    (judge.db/insert-scores! (:name args) judge score-list total-score)
-    (noir.response/redirect "/begin")))
+        total-score (reduce + just-scores)
+        student-record (first (judge.db/get-student-by-name judge.db/db-spec (:name args)))]
+    (if (= judge (:being_judged_by student-record))
+      (doall
+        (judge.db/insert-scores! (:name args) judge score-list total-score)
+        (noir.response/redirect "/begin"))
+       (layout/render "scoring-error.html"))))
 
-(defn cancel [args]
-  (judge.db/assign-judge-to-student! judge.db/db-spec nil (:n args))
-  (noir.response/redirect "/begin"))
+
+  (defn cancel [args]
+    (judge.db/assign-judge-to-student! judge.db/db-spec nil (:n args))
+    (noir.response/redirect "/begin"))

@@ -15,6 +15,7 @@
                  [prone "0.6.0"]
                  [yesql "0.4.0"]
                  [mysql/mysql-connector-java "5.1.32"]
+                 [org.clojure/data.csv "0.1.2"]
                  ]
 
   :repl-options {:init-ns judge.repl}

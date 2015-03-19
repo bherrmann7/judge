@@ -10,12 +10,10 @@
             [compojure.route :as route]))
 
 (defn home-page []
-  (println "get home called.")
   (layout/render
    "home.html" {:message (noir.session/flash-get :message) :judges (judge.db/all-judges judge.db/db-spec)}))
 
 (defn login-page [judge-name password]
-  (println "Login called with " judge-name " " password)
   (if (= "sf" password)
     (do
       (noir.session/assoc-in! [:user] judge-name)
@@ -34,7 +32,9 @@
    :stats (first (judge.db/judge-stats-summary judge.db/db-spec user))})
 
 (defn begin-page []
-  (let [user (noir.session/get :user)]
+  (let [user (noir.session/get :user)
+        not-used (judge.db/unassign-judge-from-any-students! judge.db/db-spec user)
+        ]
     (if (nil? user)
       (noir.response/redirect "/")
       (layout/render "begin.html" (begin-stats user)))))

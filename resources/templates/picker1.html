@@ -1,11 +1,12 @@
 
-{% ifequal "Overall Effort" name %}
+{% ifequal "Overall Effort Multiplier" name %}
 
-<input style="font-size: 40pt; width: 140pt;" onchange="is_valid_range(this,'{{name}}-error', 1.5)" name="{{name}}" type="number" step="0.1">
-<br>
-<span id="{{name}}-error"  >
-(Multiplier - between 1.0 and <b>1.5</b>)
-</span>
+<!--<input style="font-size: 40pt; width: 140pt;" onchange="is_valid_range(this,'{{name}}-error', 1.5)" name="{{name}}" type="number" step="0.1">-->
+<!--<br>-->
+<!--<span id="{{name}}-error"  >-->
+<!--</span>-->
+
+    {% include "templates/picker15.html" %}
 
 {% else %}
 

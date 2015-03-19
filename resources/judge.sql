@@ -32,12 +32,13 @@ SELECT
    name,
    table_assignment,
    grade,
-   position
+   position,
+   judgements
 FROM
    (
       SELECT
          *,
-         COUNT(student) jmnts
+         COUNT(student) judgements
       FROM
          students s
       LEFT JOIN
@@ -47,11 +48,15 @@ FROM
       WHERE
          s.grade = (select grade from judges where name = :judge)
          AND
-             s.being_judged_by is null
+            s.being_judged_by is null
+         AND
+            checked_in is not null
+         AND
+            checked_in < (NOW()-INTERVAL 20 MINUTE)
       GROUP BY
          name) x
 WHERE
-   jmnts<3
+   judgements<3
 AND name NOT IN
    (
       SELECT
@@ -59,8 +64,7 @@ AND name NOT IN
       FROM
          summary
       WHERE
-         judge = :judge);
-
+         judge = :judge );
 
 -- name: judge-summary
 select 'Judges' as name, count(*) as count,
@@ -96,10 +100,13 @@ insert into judgements values (:student, :judge, :criteria_name, :score);
 insert into summary values ( :student, :judge, :score);
 
 -- name: get-student-by-name
-select * from students where name = :name;
+select s.*, count(j.student) judgements from students s left outer join summary j on s.name = j.student where name = :name
 
 -- name: assign-judge-to-student!
 update students set being_judged_by=:judge where name=:student;
+
+-- name: unassign-judge-from-any-students!
+update students set being_judged_by=null where being_judged_by=:judge
 
 -- name: judge-stats-summary
 select grade, count(cnts.name) total_students,
