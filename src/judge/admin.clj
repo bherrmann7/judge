@@ -2,15 +2,31 @@
   (:require clojure.pprint
             [judge.layout :as layout]))
 
-(def site-pass (.trim (slurp "/judge-data/judge.db.pass")))
+(def site-pass (.trim (slurp "/judge-data/adminpass.txt")))
 
-(defn login [req]
+(defn login [req & more]
+    (layout/render "/admin/login.html" more )
+)
+
+(defn login-post [req password]
+  (if (and (not (clojure.string/blank? password))
+           (= password (.trim (slurp "/judge-data/adminpass.txt"))))
+    (noir.session/assoc-in! [:admin] true))
+  (login
+
+(defn admin []
+  (if (noir.session/get-in [:admin])
+    (layout/render "/admin/students.html" {:students (db/get-students)})
+    (layout/render "/admin/login.html")))
+
+(defn adults-get []
+  (if-not (noir.session/get-in [:admin])
     (layout/render "/admin/login.html")
-)
+    (let [adults (db/get-adults)
+          adults-with-link (map #(assoc % :email-link (util/make-email-link (:email %) )) adults )
+          ]
+      (layout/render "/admin/adults.html" {:adults adults-with-link}))))
 
-(defn login-post [req]
-;    (if (= (:password req) site-pass))
-)
 
 (defn admin-page [req]
   (if (get-in req [:session :admin])
