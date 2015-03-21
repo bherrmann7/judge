@@ -2,12 +2,24 @@
   (:require clojure.pprint
             [judge.layout :as layout]))
 
-(defn admin-page []
-  (layout/render "/admin/home.html" {:headers ["Name" "Total count" "Kindergarden" "First" "Second" "Third" "Fourth"]
+(def site-pass (.trim (slurp "/judge-data/judge.db.pass")))
+
+(defn login [req]
+    (layout/render "/admin/login.html")
+)
+
+(defn login-post [req]
+;    (if (= (:password req) site-pass))
+)
+
+(defn admin-page [req]
+  (if (get-in req [:session :admin])
+    (layout/render "/admin/home.html" {:headers ["Name" "Total count" "Kindergarden" "First" "Second" "Third" "Fourth"]
                                      :rows    (concat
                                                (judge.db/judge-summary judge.db/db-spec)
                                                (judge.db/student-summary judge.db/db-spec)
                                                (judge.db/judgement-summary judge.db/db-spec))}))
+   (layout/render "/admin/login.html"))
 
 (defn judges-page []
   (prn (judge.db/all-judges judge.db/db-spec))
