@@ -7,7 +7,11 @@ SELECT * FROM students;
 
 -- name: all-summary
 SELECT
-    students.name,
+    case when students.partner = ''  then
+        students.name
+    else
+        concat(students.name, ' / ' , students.partner)
+    end name,
     COUNT(summary.student)  judged,
     group_concat(judge) judged_by,
     students.being_judged_by

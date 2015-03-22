@@ -51,7 +51,7 @@
 
 ;; timeout sessions after 30 minutes
 (def session-defaults
-  {:timeout (* 60 30)
+  {:timeout (* 60 300) ; 5 hours
    :timeout-response (redirect "/")})
 
 (defn- mk-defaults
