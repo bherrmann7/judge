@@ -17,9 +17,9 @@
 (defn admin-page [req]
   (layout/render "/admin/home.html" {:headers ["Name" "Total count" "Kindergarden" "First" "Second" "Third" "Fourth"]
                                      :rows    (concat
-                                                (judge.db/judge-summary judge.db/db-spec)
-                                                (judge.db/student-summary judge.db/db-spec)
-                                                (judge.db/judgement-summary judge.db/db-spec))}))
+                                               (judge.db/judge-summary judge.db/db-spec)
+                                               (judge.db/student-summary judge.db/db-spec)
+                                               (judge.db/judgement-summary judge.db/db-spec))}))
 (defn login-post [req]
   (let [password (str (:password (:params req)))]
     (if (= password site-pass)

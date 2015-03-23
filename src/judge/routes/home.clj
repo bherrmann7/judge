@@ -7,6 +7,7 @@
             [judge.layout :as layout]
             [judge.util :as util]
             [judge.score :as score]
+            judge.load
             [compojure.route :as route]))
 
 (defn home-page []
@@ -65,5 +66,7 @@
   (GET "/a/students" req (ad/admin-check ad/students-page req))
   (GET "/a/judgements" req (ad/admin-check ad/judgements-page req))
   (GET "/a/awards" req (ad/admin-check judge.admin/awards-page req))
+  (GET "/a/reload" req (ad/admin-check judge.load/confirm req))
+  (POST "/a/reload" req (ad/admin-check judge.load/reload-judges-students req))
 
   (route/not-found "<h1>I'm verry sorry, but page not found</h1>"))

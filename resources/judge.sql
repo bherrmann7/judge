@@ -50,7 +50,7 @@ FROM
       ON
          s.name = j.student
       WHERE
-         s.grade = (select grade from judges where name = :judge)
+         s.grade = (select grade from judges where name = :judge )
          AND
             s.being_judged_by is null
          AND
@@ -68,7 +68,12 @@ AND name NOT IN
       FROM
          summary
       WHERE
-         judge = :judge );
+         judge = :judge )
+and (
+      ((select count(*) from summary where judge = :judge ) = 0 and  x.had_newbie_judge = 0  )
+             or
+       (select count(*) from summary where judge = :judge ) > 0
+      );
 
 -- name: judge-summary
 select 'Judges' as name, count(*) as count,
@@ -110,7 +115,8 @@ select s.*, count(j.student) judgements from students s left outer join summary 
 update students set being_judged_by=:judge where name=:student;
 
 -- name: unassign-judge-from-any-students!
-update students set being_judged_by=null where being_judged_by=:judge
+update students set being_judged_by=null, had_newbie_judge =
+    case when (select count(*) from summary where judge = being_judged_by ) = 0 then 1 else 0 end  where being_judged_by=:judge;
 
 -- name: judge-stats-summary
 select grade, count(cnts.name) total_students,
@@ -122,3 +128,24 @@ select grade, count(cnts.name) total_students,
  from (select stu.name, stu.checked_in, count(summary.student) judged, stu.grade from students stu left join
    summary on summary.student = stu.name where stu.grade =
     (select grade from judges where name = :judge_name ) group by stu.name order by judged) cnts;
+
+-- name: delete-from-students!
+delete from students;
+
+-- name: delete-from-judges!
+delete from judges;
+
+-- name: delete-from-summary!
+delete from summary;
+
+-- name: delete-from-judgements!
+delete from judgements;
+
+
+-- name: insert-student!
+insert into students values (:name, '', :grade, null, null, null, :partner, false);
+
+-- name: insert-judge!
+insert into judges values (:name, :grade);
+
+
