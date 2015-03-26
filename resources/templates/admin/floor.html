@@ -1,0 +1,64 @@
+{% extends "templates/admin/base.html" %}
+{% block content %}
+
+<h1>
+    The Floor
+</h1>
+
+<br>
+
+<table class="table">
+
+    <tr>
+        {% for table in tables.row1 %}
+        <td>&nbsp;</td>
+        <th>{{table.0}}</th>
+        <td></td>
+        <th>{{table.1}}</th>
+        <td>&nbsp;</td>
+        {% endfor %}
+    </tr>
+
+        {% for num in four-to-one %}
+    <tr>
+            {% for table in tables.row1 %}
+                <td>{% random-judge %}</td>
+                <td style="background-color: {% random-color %}">{% random-student %}</font></td>
+                <td style="background-color: black; color: white;">{{num}}</td>
+                <td style="background-color: {% random-color %}">{% random-student %}</td>
+                <td>{% random-judge %}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+
+    <tr>
+        {% for table in tables.row2 %}
+        <th>{{table.0}}</th>
+        <td></td>
+        <th>{{table.1}}</th>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        {% endfor %}
+    </tr>
+
+    {% for num in four-to-one %}
+    <tr>
+        {% for table in tables.row1 %}
+        <td>{% random-judge %}</td>
+        <td style="background-color: {% random-color %}">{% random-student %}</font></td>
+        <td style="background-color: black; color: white;">{{num}}</td>
+        <td style="background-color: {% random-color %}">{% random-student %}</font></td>
+        <td>{% random-judge %}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+
+</table>
+</div>
+    </div>
+{% endblock %}
+

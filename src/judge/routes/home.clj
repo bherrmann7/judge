@@ -68,5 +68,9 @@
   (GET "/a/awards" req (ad/admin-check judge.admin/awards-page req))
   (GET "/a/reload" req (ad/admin-check judge.load/confirm req))
   (POST "/a/reload" req (ad/admin-check judge.load/reload-judges-students req))
+  (GET "/a/floor" req (judge.admin/floor req))
+  (POST "/a/check-in-student" req (ad/admin-check judge.admin/student-checkin req))
+
+  (GET "/a/awards" req (ad/admin-check ad/awards req ))
 
   (route/not-found "<h1>I'm verry sorry, but page not found</h1>"))

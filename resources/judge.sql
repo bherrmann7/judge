@@ -148,4 +148,25 @@ insert into students values (:name, '', :grade, null, null, null, :partner, fals
 -- name: insert-judge!
 insert into judges values (:name, :grade);
 
+-- name: students-not-checked-in
+select name, case when students.partner = ''  then
+     students.name
+   else
+     concat(students.name, ' / ' , students.partner)
+   end team from students where checked_in is null order by name;
+
+-- name: checkin-student!
+update students set checked_in = now() where name = :name;
+
+-- name: get-hightest
+select name, grade, sum(score) tot, count(score) from summary sm join students st on st.name = sm.student where grade = '4' group by name limit 4
+union
+select name, grade, sum(score) tot, count(score) from summary sm join students st on st.name = sm.student where grade = '3' group by name limit 4
+union
+select name, grade, sum(score) tot, count(score) from summary sm join students st on st.name = sm.student where grade = '2' group by name limit 4
+union
+select name, grade, sum(score) tot, count(score) from summary sm join students st on st.name = sm.student where grade = '1' group by name limit 4
+union
+select name, grade, sum(score) tot, count(score) from summary sm join students st on st.name = sm.student where grade = 'K' group by name limit 4
+;
 

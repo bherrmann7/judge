@@ -110,24 +110,12 @@
         <h2>Judge</h2>
 
         <form id="scoring" action="{{servlet-context}}/scored" method="post" onsubmit="return false;">
-
-            Table: {{table_assignment}} &nbsp;&nbsp;Position: {{position}}&nbsp;&nbsp;Grade: {{grade}}
-            &nbsp;&nbsp;Judged: {{judgements}}<br>
-            Name: {{name}}
-            {% if partner %}
-            <br>
-            Name: {{partner}}
-            {% endif %}
-            {% if judgements = 2 %}
-            <div style="background-color:yellow; color: blue"><center>Bring award{% if partner %}s{% endif %}</center></div>
-            {% endif %}
-
+            {% include "templates/stocktop.html" %}
 
             <input type="hidden" name="name" value="{{name}}">
             </input>
             <input type="hidden" name="project-type" value="{{project-type}}">
             </input>
-
 
             <div align="right">
                 {% for criterion in criteria %}

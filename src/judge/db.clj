@@ -15,4 +15,3 @@
   (doseq [[criteria_name score] scores]
     (insert-score!  db-spec student judge criteria_name score))
   (assign-judge-to-student! db-spec nil student))
-

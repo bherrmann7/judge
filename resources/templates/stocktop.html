@@ -1,0 +1,10 @@
+Table: <b>{{table_assignment}}</b> &nbsp;Pos: <b>{{position}}</b>&nbsp;Grade: <b>{{grade}}</b>
+&nbsp;&nbsp;Judged: <b>{{judgements}}</b><br>
+Name: {{name}}
+{% if partner %}
+<br>
+Name: {{partner}}
+{% endif %}
+{% if judgements = 2 %}
+<div style="background-color:yellow; color: blue"><center>Bring award{% if partner %}s{% endif %}</center></div>
+{% endif %}

@@ -45,89 +45,30 @@
 <br>
 
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-4">
         <div class=" panel panel-default">
             <div class="panel-body">
-                <form class="form-inline" action="{{servlet-context}}/a/add-student">
-                    <div class="form-group">
-                        &nbsp;&nbsp;
-                        <label for="student-name">Name</label>
-                        <input name="student" type="text" class="form-control" id="student-name">
-                    </div>
-                    <div class="form-group">
-                        &nbsp;&nbsp;
-                        <label for="student-grade">Grade</label>
-                        <select name="grade" class="form-control" id="student-grade">
-                            <option>K</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        &nbsp;&nbsp;
-                        <label for="table_assigment">Table</label>
-                        <select name="table_assigment" class="form-control" id="table_assigment">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>6</option>
-                            <option>7</option>
-                            <option>8</option>
-                            <option>9</option>
-                            <option>10</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        &nbsp;&nbsp;
-                        <label for="position">Position</label>
-                        <select name="table_assigment" class="form-control" id="position">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>6</option>
-                        </select>
-                        &nbsp;&nbsp;
-                        <button type="submit" class="btn btn-default">Add Student</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
-<div class="row">
-    <div class="col-md-7">
-        <div class=" panel panel-default">
-            <div class="panel-body">
-                <form class="form-inline" action="{{servlet-context}}/a/add-juge">
-                    <div class="form-group">
-                        &nbsp;&nbsp;
-                        <label for="judge-name">Name</label>
-                        <input type="text" class="form-control" id="judge-name">
-                    </div>
-                    <div class="form-group">
-                        &nbsp;&nbsp;
-                        <label for="judge-grade">Grade</label>
-                        <select name="grade" class="form-control" id="judge-grade">
-                            <option>K</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
+                <form class="form-inline" action="{{servlet-context}}/a/check-in-student" method="post">
+                        Student Name &nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-default">Check In Student</button>
+                    <br>
+                    <br>
+                        <select name="student-name" class="form-control" id="student-name" size="20">
+                            {% for student in students-not-checked-in %}
+                                <option value="{{student.name}}">{{student.team}}</option>
+                            {% endfor %}
                         </select>
-                    </div>
-                    <div class="form-group">
-                        &nbsp;&nbsp;
-                        <button type="submit" class="btn btn-default">Add Judge</button>
-                    </div>
+
                 </form>
             </div>
         </div>
     </div>
-</div>
+    <div class="col-md-7">
+        {% if checked-in-student %}
+            <div class="alert alert-success" role="alert">Checked in: <b>{{checked-in-student.name}}</b> at Table/Position:
+                <b>{{checked-in-student.table_assignment}}-{{checked-in-student.position}}</b>
+            </div>
+        {% endif %}
+    </div>
 
 {% endblock %}

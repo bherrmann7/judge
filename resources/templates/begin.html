@@ -24,9 +24,9 @@
         <input style='font-size: 45' type="submit" value="Judge a Project"/>
         {% else %}
         {% if judging-finished %}
-        Judging for your grade has finished.
+        <b>Judging for your grade has finished.</b>
         {% else %}
-        <a style='font-size: 45' href="{{servlet-context}}/begin">Refresh</a>
+        <a style='font-size: 45' href="{{servlet-context}}/begin">Check for Available Students</a>
         {% endif %}
         {% endif %}
     </form>

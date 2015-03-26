@@ -45,18 +45,17 @@
   (let [students (rest (with-open [in-file (io/reader "/judge-data/students.csv")] (doall (csv/read-csv in-file))))
         students-simpler (map #(vector (nth % 0) (nth % 2) (nth % 4)) students)]
     (doseq [[name grade partner] (group-students-with-partners students-simpler)]
-      (db/insert-student! db/db-spec name grade partner)))
+      (db/insert-student! db/db-spec name (.toUpperCase grade) partner)))
 
   (let [judges (rest (with-open [in-file (io/reader "/judge-data/judges.csv")] (doall (csv/read-csv in-file))))]
     (doseq [row judges]
-            (if (not (empty? (.trim (second row))))
-                (db/insert-judge! db/db-spec (second row) (first (shuffle ["K" "1" "2" "3" "4"]))))))
+      (if (not (empty? (.trim (second row))))
+        (db/insert-judge! db/db-spec (second row) (first (shuffle ["K" "1" "2" "3" "4"]))))))
 
 
   (db/insert-judge! db/db-spec "Bob Herrmann" "2")
   (db/insert-judge! db/db-spec "Carl Prestia" "3")
   (db/insert-judge! db/db-spec "Deb June" "4")
 
-(noir.response/redirect "/")
-  )
+  (noir.response/redirect "/"))
 
