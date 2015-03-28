@@ -26,6 +26,21 @@ GROUP BY
 ORDER BY
     judged;
 
+-- name: all-students-floor
+SELECT
+    students.*,
+    COUNT(summary.student)  judged
+FROM
+    students
+LEFT JOIN
+    summary
+ON
+    students.name = summary.student
+GROUP BY
+    students.name
+ORDER BY
+    judged;
+
 
 -- name: you-judged
 select count(*) as judged from summary where judge = :judge;
@@ -143,7 +158,7 @@ delete from judgements;
 
 
 -- name: insert-student!
-insert into students values (:name, '', :grade, null, null, null, :partner, false);
+insert into students values (:name, :table_assignment, :grade, :position, null, null, :partner, false);
 
 -- name: insert-judge!
 insert into judges values (:name, :grade);
@@ -159,14 +174,14 @@ select name, case when students.partner = ''  then
 update students set checked_in = now() where name = :name;
 
 -- name: get-hightest
-select name, grade, sum(score) tot, count(score) from summary sm join students st on st.name = sm.student where grade = '4' group by name limit 4
+(select name, grade, sum(score) total, count(score) judge_counts from summary sm join students st on st.name = sm.student where grade = '4' group by name order by total desc limit 5)
 union
-select name, grade, sum(score) tot, count(score) from summary sm join students st on st.name = sm.student where grade = '3' group by name limit 4
+(select name, grade, sum(score) total, count(score) from summary sm join students st on st.name = sm.student where grade = '3' group by name order by total desc limit 5)
 union
-select name, grade, sum(score) tot, count(score) from summary sm join students st on st.name = sm.student where grade = '2' group by name limit 4
+(select name, grade, sum(score) total, count(score) from summary sm join students st on st.name = sm.student where grade = '2' group by name order by total desc limit 5)
 union
-select name, grade, sum(score) tot, count(score) from summary sm join students st on st.name = sm.student where grade = '1' group by name limit 4
+(select name, grade, sum(score) total, count(score) from summary sm join students st on st.name = sm.student where grade = '1' group by name order by total desc limit 5)
 union
-select name, grade, sum(score) tot, count(score) from summary sm join students st on st.name = sm.student where grade = 'K' group by name limit 4
+(select name, grade, sum(score) total, count(score) from summary sm join students st on st.name = sm.student where grade = 'K' group by name order by total desc limit 5)
 ;
 

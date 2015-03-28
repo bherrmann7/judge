@@ -7,7 +7,7 @@
     }
 </style>
 <font size="26">
-    <p style="float: right; padding: 10px;"><a href="{{servlet-context}}/logout">Logout</a></p>
+    <p style="float: right; padding: 10px;"><a id='logout' href="{{servlet-context}}/logout">Logout</a></p>
 
     <h1>Ready to Judge</h1>
     Logged in as: {{user}}<p>
@@ -21,7 +21,7 @@
 
     <form action="{{servlet-context}}/score" method="get">
         {% if could-judge > 0 %}
-        <input style='font-size: 45' type="submit" value="Judge a Project"/>
+        <input id="judge" style='font-size: 45' type="submit" value="Judge a Project"/>
         {% else %}
         {% if judging-finished %}
         <b>Judging for your grade has finished.</b>

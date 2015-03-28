@@ -49,26 +49,69 @@
                   :rows    (judge.db/all-summary judge.db/db-spec)}))
 
 
+(defn initials-name [name partner]
+  (if (empty? name)
+    ""
+  (let [
+        part (if (empty? partner) "" "+" )
+        split-name (clojure.string/split name #" ")]
+    (.toUpperCase (str (first (first split-name)) (first (last split-name)) part )))))
 
-(selmer.parser/add-tag! :random-color
-                        (fn [args context-map]
-                          (first (shuffle ["white" "lightpink" "lightblue" "lightgreen"]))))
+(defn initials [student]
+  (if (empty? student)
+    ""
+    (initials-name (:name student) (:partner student) )))
 
-(selmer.parser/add-tag! :random-student
-                        (fn [args context-map]
-                          (first (shuffle ["TM" "LH/MK" "TR" "DY" "ER" "AF"]))))
 
-(selmer.parser/add-tag! :random-judge
+(defn find-student [context-map args]
+  (let [{:keys [table num]} context-map
+        table-assignment (str (if args (second table) (first table)))]
+    (first (filter #(and (= num (:position %)) (= (:table_assignment %) table-assignment)) (:students context-map)))))
+
+
+(selmer.parser/add-tag! :student
                         (fn [args context-map]
-                          (first (shuffle ["" "" "" "" "" "" "" "" "" "" "" "" "" ""
-                                           "BK" "JS" "RK"]))))
+                          (initials (find-student context-map args))))
+
+(selmer.parser/add-tag! :student-color
+                        (fn [args context-map]
+                          (println "judged" (str (:judged (find-student context-map args))))
+                          (case (str (:judged (find-student context-map args)))
+                            "0" "white"
+                            "1" "lightpink"
+                            "2" "lightblue"
+                            "3" "lightgreen"
+                            nil "blue"
+                            "white"
+
+                          )
+                        ))
+
+               ;             "white" #_(first (shuffle ["white" "lightpink" "lightblue" "lightgreen"])))))
+
+
+(selmer.parser/add-tag! :judge
+                        (fn [args context-map]
+                          (let[ student (find-student context-map args)]
+                          (initials-name (:being_judged_by (find-student context-map args)) nil )
+                          )))
+
+(selmer.parser/add-tag! :judge-color
+                        (fn [args context-map]
+                          (let[ student (find-student context-map args)]
+                            (if (:being_judged_by (find-student context-map args))
+                              "orange"
+                              "white"
+                            ))))
 
 (defn floor [req]
   (layout/render "/admin/floor.html" {:tables      {:row1
                                                     [["X" "W"] ["V" "U"] ["T" "S"] ["R" "Q"] ["P" "O"] ["N" "M"]]
                                                     :row2
                                                     [["L" "K"] ["J" "I"] ["H" "G"] ["F" "E"] ["D" "C"] ["B" "A"]]}
-                                      :four-to-one (reverse (range 1 5))}))
+                                      :four-to-one (reverse (range 1 5))
+                                      :students    (judge.db/all-students-floor judge.db/db-spec)
+                                      :judges      (judge.db/all-judges judge.db/db-spec)}))
 
 (defn student-checkin [req]
   (let [
@@ -79,9 +122,11 @@
     (noir.response/redirect "/a")))
 
 (defn awards-page [req]
-  (let [highest-scores (judge.db/get-hightest judge.db/db-spec)]
+  (let [highest-scores (judge.db/get-hightest judge.db/db-spec)
+        awards (group-by #(:grade %) highest-scores)
+        ]
+    (println awards)
     (layout/render "/admin/awards.html" {
-                                         :awards
-
+                                         :awards awards
                                          })))
 

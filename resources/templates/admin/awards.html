@@ -4,7 +4,25 @@
 
 <h1>Awards</h1>
 
+<br><br>
+<div class="container">
+    <div class="col-md-6">
+{% for grade in awards|sort %}
+Grade {{ grade.0}}
+<table class="table">
+    {% for student in grade.1|sort-by-reversed:total %}
+        <td width="300px">
+            {{student.name}}
+        </td>
+        <td> {{student.total}}</td>
+    </tr>
+    {% endfor %}
+</table>
 
+<p>&nbsp;</p>
+{% endfor %}
+    </div>
 
+</div>
 
 {% endblock %}

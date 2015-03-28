@@ -43,19 +43,15 @@
   (db/delete-from-judgements! db/db-spec)
 
   (let [students (rest (with-open [in-file (io/reader "/judge-data/students.csv")] (doall (csv/read-csv in-file))))
-        students-simpler (map #(vector (nth % 0) (nth % 2) (nth % 4)) students)]
-    (doseq [[name grade partner] (group-students-with-partners students-simpler)]
-      (db/insert-student! db/db-spec name (.toUpperCase grade) partner)))
+        students-simpler (map #(vector (nth % 0) (.toUpperCase(nth % 3)) (nth % 1) (str (first (nth % 4))) (str (second (nth % 4))) ) students)]
+    (doseq [[name grade partner table_assignment position ] (group-students-with-partners students-simpler)]
+      ;(prn  "name=" name "table=" table_assignment "grade= " grade "position=" position "partern=" partner  ))
+      (db/insert-student! db/db-spec name table_assignment grade position partner  )))
 
   (let [judges (rest (with-open [in-file (io/reader "/judge-data/judges.csv")] (doall (csv/read-csv in-file))))]
     (doseq [row judges]
       (if (not (empty? (.trim (second row))))
-        (db/insert-judge! db/db-spec (second row) (first (shuffle ["K" "1" "2" "3" "4"]))))))
-
-
-  (db/insert-judge! db/db-spec "Bob Herrmann" "2")
-  (db/insert-judge! db/db-spec "Carl Prestia" "3")
-  (db/insert-judge! db/db-spec "Deb June" "4")
+        (db/insert-judge! db/db-spec (second row) (nth row 6) ))))
 
   (noir.response/redirect "/"))
 
