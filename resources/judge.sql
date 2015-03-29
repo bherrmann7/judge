@@ -174,14 +174,14 @@ select name, case when students.partner = ''  then
 update students set checked_in = now() where name = :name;
 
 -- name: get-hightest
-(select name, grade, sum(score) total, count(score) judge_counts from summary sm join students st on st.name = sm.student where grade = '4' group by name order by total desc limit 5)
+(select name, partner, grade, sum(score) total, count(score) judge_counts from summary sm join students st on st.name = sm.student where grade = '4' group by name order by total desc limit 5)
 union
-(select name, grade, sum(score) total, count(score) from summary sm join students st on st.name = sm.student where grade = '3' group by name order by total desc limit 5)
+(select name, partner, grade, sum(score) total, count(score) from summary sm join students st on st.name = sm.student where grade = '3' group by name order by total desc limit 5)
 union
-(select name, grade, sum(score) total, count(score) from summary sm join students st on st.name = sm.student where grade = '2' group by name order by total desc limit 5)
+(select name, partner, grade, sum(score) total, count(score) from summary sm join students st on st.name = sm.student where grade = '2' group by name order by total desc limit 5)
 union
-(select name, grade, sum(score) total, count(score) from summary sm join students st on st.name = sm.student where grade = '1' group by name order by total desc limit 5)
+(select name, partner, grade, sum(score) total, count(score) from summary sm join students st on st.name = sm.student where grade = '1' group by name order by total desc limit 5)
 union
-(select name, grade, sum(score) total, count(score) from summary sm join students st on st.name = sm.student where grade = 'K' group by name order by total desc limit 5)
+(select name, partner, grade, sum(score) total, count(score) from summary sm join students st on st.name = sm.student where grade = 'K' group by name order by total desc limit 5)
 ;
 

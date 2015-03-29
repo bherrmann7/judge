@@ -12,7 +12,7 @@ Grade {{ grade.0}}
 <table class="table">
     {% for student in grade.1|sort-by-reversed:total %}
         <td width="300px">
-            {{student.name}}
+            {{student.name}}       /      {{student.partner}}
         </td>
         <td> {{student.total}}</td>
     </tr>

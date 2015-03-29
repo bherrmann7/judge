@@ -75,7 +75,7 @@
 
 (selmer.parser/add-tag! :student-color
                         (fn [args context-map]
-                          (println "judged" (str (:judged (find-student context-map args))))
+
                           (case (str (:judged (find-student context-map args)))
                             "0" "white"
                             "1" "lightpink"
@@ -125,7 +125,6 @@
   (let [highest-scores (judge.db/get-hightest judge.db/db-spec)
         awards (group-by #(:grade %) highest-scores)
         ]
-    (println awards)
     (layout/render "/admin/awards.html" {
                                          :awards awards
                                          })))
