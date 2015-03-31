@@ -2,7 +2,20 @@
 
 A simple web application for judging a science fair
 
-#
+# What is the Judge application
+
+## What Does a Judge Do?
+
+## What Does the Admin Do?
+
+### Loading Students and Judges
+
+### Doing Check-In
+
+### Using the Ppp to Monitor the Progess
+
+### Awards page
+
 
 The Judge web application was written using mysql http://mysql.com and Luminus http://www.luminusweb.net/
 

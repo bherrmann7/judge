@@ -7,9 +7,6 @@ to judge.  More details about the fair and its information and rules are at http
 I, Bob Herrmann, am the developer for the judge application and was responsible for ensuring it ran correctly on the
 day of the fair.
 
-# What is the Judge application
-
-
 
 # Setup
 
