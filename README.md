@@ -24,6 +24,10 @@ To start a web server for the application, run:
 
     $ lein ring server
 
+## Experience Report
+
+    See the [Experience Report](experience_report.md) from using this application.
+
 ## License
 
 Copyright © 2014 Bob Herrmann
