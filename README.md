@@ -26,7 +26,7 @@ To start a web server for the application, run:
 
 ## Experience Report
 
-    See the [Experience Report](/bherrmann7/judge/blob/master/README.md) from using this application.
+    See the https://github.com/bherrmann7/judge/blob/master/experience_report.md
 
 ## License
 
