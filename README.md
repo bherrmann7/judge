@@ -26,7 +26,7 @@ To start a web server for the application, run:
 
 ## Experience Report
 
-    See the [Experience Report](experience_report.md) from using this application.
+    See the [Experience Report](../experience_report.md) from using this application.
 
 ## License
 

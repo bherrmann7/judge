@@ -7,6 +7,10 @@ to judge.  More details about the fair and its information and rules are at http
 I, Bob Herrmann, am the developer for the judge application and was responsible for ensuring it ran correctly on the
 day of the fair.
 
+# What is the Judge application
+
+
+
 # Setup
 
 I ran the application on an Ubuntu 14.04 desktop machine (from system76.com.)  The Ubuntu served as a wifi
@@ -16,7 +20,10 @@ I set up the wifi hotspot name as "sciencefair."   The network was setup like th
 count on any other networking facility (aka the schools shuts its wifi off on the weekends.)   Also owning this
 means we didnt have to worry about the "internet" being slow during the fair.
 
-This allowed Android phones/tablets and iphone/ipads to connect to the "sciencefair" wifi network.
+The judge application is a web application.  Once devices are connected to the "sciencefair" network, they could then
+go to their browser and then enter the IP address of the application (10.42.0.1 in this case.)
+
+Choosing to do a web application meant that Android phones/tablets and iphone/ipads could easily be used.
 
 I had modifed the rc.local to start up the application on boot and direct traffic on port 80 to port 3000,
 
@@ -55,6 +62,8 @@ In preparation for the fair, the
 ## judge scaling
 
 ## was this a good idea (ie better than paper?)
+
+## why clojure?
 
 
 
