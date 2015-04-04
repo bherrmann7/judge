@@ -8,7 +8,7 @@ I, Bob Herrmann, am the developer for the judge application and was responsible 
 day of the fair.
 
 
-# Setup
+# The Setup Used
 
 I ran the application on an Ubuntu 14.04 desktop machine (from system76.com.)  The Ubuntu served as a wifi
 infrastructure mode hotspot using a "Panda 300Mbps Wireless-N USB Adapter - 802.11 n, 2.4GHz - w/ High Gain Antenna."
@@ -36,15 +36,28 @@ infrastructure hotspot working on it proved problematic.    Using a desktop mach
 about possible power outages and/or cords getting kicked out.
 
 
-# Prior the Fair
+# Training - Prior the Fair
 
 The application was made accessible to other members of the team at a private URL so that
 the application could be tested and reviewed.
 
-In preparation for the fair, the
+In preparation for the fair, there were two training sessions for judges.   The fair used over 20 judges for around 80
+or so projects.   During training the judges connected to the judge application and scored a project.   This let
+them familurize with the application.  There were only two steps, 1 join the "sciencefair" wifi network, and then
+navigate to 10.42.0.1
 
+Feeback:
+This seemed to go well and their were no problems with using the application.
 
 # check-in
+
+Students lined up to check in when the arrived.  A table with a person running a laptop, and two other staff members
+checked students in.   The laptop person would select the students name from a list, then click the check in button to
+check them in.   The recorded their arrival time in the system.   A judge would not be able to judge a student until
+they had been in the system for at least 20 minutes.
+
+Feedback:  I was the one looking up students.   This felt very awkward, trying to find the student by name was tricky
+because sometimes they would offer their last name (the list was sorted by first name)
 
 # judging
 
@@ -59,8 +72,5 @@ In preparation for the fair, the
 ## judge scaling
 
 ## was this a good idea (ie better than paper?)
-
-## why clojure?
-
 
 

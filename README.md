@@ -2,40 +2,11 @@
 
 A simple web application for judging a science fair
 
-# What is the Judge application
+For more details on what is the application, see [What is Judge](docs/what.md)
 
-## What Does a Judge Do?
+## Development
 
-## What Does the Admin Do?
-
-### Loading Students and Judges
-
-### Doing Check-In
-
-### Using the Ppp to Monitor the Progess
-
-### Awards page
-
-
-The Judge web application was written using mysql http://mysql.com and Luminus http://www.luminusweb.net/
-
-## Create Database Using 
-
-Install mysql
-
-Creating the application schema
-
-    $ mysql -u dataBaseUser -p databasePassword < schema.sql
-
-## Running
-
-Install Java 
-
-Download Leiningen from http://leiningen.org/
-
-To start a web server for the application, run:
-
-    $ lein ring server
+See [Development](docs/development.md)
 
 ## Experience Report
 
