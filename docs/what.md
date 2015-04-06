@@ -19,7 +19,8 @@ a page which shows the highest 5 scores for each grade.
 A judge uses an ipad/iphone/android/tablet to connect to the application.  The judge then finds their name and the grade
 the are assigned to on a dropdown.   The judge then enters the password and clicks login.
 
-<img src="img/login.png" border=2 />
+![Image of login screen]
+(img/login.png)
 
 The judge see sees the begin screen.    This screen confirms their identity, and shows them how many projects they
    have judged and shows them how many more they could possibly judge.   For example if 3rd grade had 20 students and
