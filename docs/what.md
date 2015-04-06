@@ -1,17 +1,25 @@
 
 # What is the Judge application
 
-The judge application is configured with a set of judges (name and grade assigned) and a set of projects.   The judges
-use the application to find out which projects need to be scored.  They then input their judgement for an assigned
-project.   They then repeat until all projects have been judged three times.
+The judge application allows a set of judges to pass judgement on a set of science fair projects.    The application
+is used to assign and direct a judge to a project.  The application then collects the scores that the judge makes.
+The application was written to judge grades K through 4.
+Each judge is assigned a single grade to assess.
 
-The judge application also has an administrator interface.   This interfaces allows the science fair staff to check
- students in and monitor the progress of the science fair.
+The judge application is configured with a set of judges (name and grade assigned) and a set of projects.  The application
+randomly assigns the judge to a project when the judge asks to start. They then input their judgement for an assigned
+project.   They then repeat until all projects in their grade have been judged three times.
+
+The judge application also has an administrator interface.   This interfaces allows the science fair staff to "check
+students in" and monitor the progress of the science fair.  It also provides
+a page which shows the highest 5 scores for each grade.
 
 ## What Does a Judge Do?
 
 A judge uses an ipad/iphone/android/tablet to connect to the application.  The judge then finds their name and the grade
 the are assigned to on a dropdown.   The judge then enters the password and clicks login.
+
+![Login screen](img/login.jpg)
 
 The judge see sees the begin screen.    This screen confirms their identity, and shows them how many projects they
    have judged and shows them how many more they could possibly judge.   For example if 3rd grade had 20 students and

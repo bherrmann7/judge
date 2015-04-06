@@ -8,7 +8,7 @@ I, Bob Herrmann, am the developer for the judge application and was responsible 
 day of the fair.
 
 
-# The Setup Used
+## The Setup Used
 
 I ran the application on an Ubuntu 14.04 desktop machine (from system76.com.)  The Ubuntu served as a wifi
 infrastructure mode hotspot using a "Panda 300Mbps Wireless-N USB Adapter - 802.11 n, 2.4GHz - w/ High Gain Antenna."
@@ -36,7 +36,7 @@ infrastructure hotspot working on it proved problematic.    Using a desktop mach
 about possible power outages and/or cords getting kicked out.
 
 
-# Training - Prior the Fair
+## Training - Prior the Fair
 
 The application was made accessible to other members of the team at a private URL so that
 the application could be tested and reviewed.
@@ -49,7 +49,7 @@ navigate to 10.42.0.1
 Feeback:
 This seemed to go well and their were no problems with using the application.
 
-# check-in
+## check-in
 
 Students lined up to check in when the arrived.  A table with a person running a laptop, and two other staff members
 checked students in.   The laptop person would select the students name from a list, then click the check in button to
@@ -57,20 +57,24 @@ check them in.   The recorded their arrival time in the system.   A judge would 
 they had been in the system for at least 20 minutes.
 
 Feedback:  I was the one looking up students.   This felt very awkward, trying to find the student by name was tricky
-because sometimes they would offer their last name (the list was sorted by first name)
+because sometimes they would offer their last name (the list was sorted by first name.)   The list could also have been
+broken down by grades, that would have speeded things up too.
 
-# judging
+## Judging
 
-# problems
+Judging went pretty smoothly.   There was a student who believes they were only judged once.   Perhaps a judge went
+to the wrong location?
 
-# for next year
+There was a judge who couldnt post a score.  The judge application showed the error page with the red text asking
+the judge to seek out tech support.   I fiddled with the trying to re-submit - and kept getting the red error page.
+The red error page is supposed to prevent multiple submissions on the scoring screen.   I'm not sure why there was
+a problem with this single iphone user.
 
-# final thoughts
-
-## judging at all
-
-## judge scaling
 
 ## was this a good idea (ie better than paper?)
+
+Two of the returning judges said this was better than the paper system. All feedback about the judge application
+was positive.
+
 
 
