@@ -58,7 +58,7 @@ they had been in the system for at least 20 minutes.
 
 Feedback:  I was the one looking up students.   This felt very awkward, trying to find the student by name was tricky
 because sometimes they would offer their last name (the list was sorted by first name.)   The list could also have been
-broken down by grades, that would have speeded things up too.
+broken down by grades, that would have sped things up too.
 
 ## Judging
 

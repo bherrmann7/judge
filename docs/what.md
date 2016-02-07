@@ -44,9 +44,15 @@ When the user confirms the score, then they are returned to the beginning screen
 
 ## What Does the Admin Do?
 
+
 ### Loading Students and Judges
 
+The list of students and judges are loaded from a csv file.   The files are placed into  /judge-data as student.csv
+and judges.csv - the data is reloaded by accessing /a/reload
+
 ### Doing Check-In
+
+
 
 ### Using the app to Monitor the Progress
 

@@ -71,4 +71,4 @@
   (GET "/a/floor" req (judge.admin/floor req))
   (POST "/a/check-in-student" req (ad/admin-check judge.admin/student-checkin req))
 
-  (route/not-found "<h1>I'm verry sorry, but page not found</h1>"))
+  (route/not-found "<h1>Page Not Found</h1>"))
