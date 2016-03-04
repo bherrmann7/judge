@@ -1,0 +1,19 @@
+<br>
+You Judged
+<br>
+<br>
+
+<form method="post" action="adjust-scores">
+{% for j in judged %}
+<br>{{j.student}} - <input name="{{j.student}}" size=8 type="input" value="{{j.score}}">
+{% endfor %}
+
+    <br>
+    <br>
+    <input name="save" type="Submit" value="Save"/>
+    &nbsp;
+    &nbsp;
+    <input name="cancel" type="Submit" value="Cancel"/>
+    </fo
+</form>
+

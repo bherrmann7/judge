@@ -49,15 +49,42 @@
         <div class=" panel panel-default">
             <div class="panel-body">
 
-                <form class="form-inline" action="{{servlet-context}}/a/check-in-student" method="post">
-                        Student Name &nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-default">Check In Student</button>
+
+                        Student Name &nbsp;&nbsp;&nbsp;
                     <br>
-                    <br>
-                        <select name="student-name" class="form-control" id="student-name" size="20">
-                            {% for student in students-not-checked-in %}
-                                <option value="{{student.name}}">{{student.team}}</option>
-                            {% endfor %}
-                        </select>
+                    <table class="tablesorter table table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Grade</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for student in students-not-checked-in%}
+                        <tr>
+                            <td>
+                                {{student.name}}
+                            </td>
+                            <td>
+                                {{student.grade}}
+                            </td>
+                            <td>
+                                <form class="form-inline" action="{{servlet-context}}/a/check-in-student" method="post">
+                                    <button type="submit" class="btn btn-default btn-xs">Check In Student</button>
+                                    <input type="hidden"  name="student-name" value="{{student.name}}">
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <!--<br>-->
+                        <!--<select name="student-name" class="form-control" id="student-name" size="20">-->
+                            <!--{% for student in students-not-checked-in %}-->
+                                <!--<option value="{{student.name}}">{{student.grade}} {{student.team}} </option>-->
+                            <!--{% endfor %}-->
+                        <!--</select>-->
 
                 </form>
             </div>

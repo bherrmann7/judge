@@ -42,8 +42,12 @@ ORDER BY
     judged;
 
 
--- name: you-judged
+-- name: you-judged-count
 select count(*) as judged from summary where judge = :judge;
+
+-- name: you-judged
+select student, score from summary where judge = :judge;
+
 
 -- name: who-can-i-judge
 -- names of students who can I can judge next :judge judge
@@ -123,6 +127,9 @@ insert into judgements values (:student, :judge, :criteria_name, :score);
 -- name: insert-summary!
 insert into summary values ( :student, :judge, :score);
 
+-- name: update-summary!
+update summary set score=:score where student=:student and judge=:judge;
+
 -- name: get-student-by-name
 select s.*, count(j.student) judgements from students s left outer join summary j on s.name = j.student where name = :name
 
@@ -168,7 +175,9 @@ select name, case when students.partner = ''  then
      students.name
    else
      concat(students.name, ' / ' , students.partner)
-   end team from students where checked_in is null order by name;
+   end team,
+   students.grade
+    from students where checked_in is null order by name;
 
 -- name: checkin-student!
 update students set checked_in = now() where name = :name;
