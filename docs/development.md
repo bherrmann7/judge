@@ -14,6 +14,8 @@ for developing new web applications.
 ## Create Database Using
 
 Install mysql  - technique varies per OS
+On ubuntu
+   $  sudo apt-get install mysql-server mysql-client
 
 Creating the application schema
 
