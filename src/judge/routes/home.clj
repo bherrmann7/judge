@@ -10,8 +10,9 @@
             judge.load
             [compojure.route :as route]))
 
+
 (defn home-page []
-  (layout/render
+  (layout/render-style
     "home.html" {:message (noir.session/flash-get :message) :judges (judge.db/all-judges judge.db/db-spec)}))
 
 (defn login-page [judge-name password]
@@ -23,9 +24,6 @@
       (noir.session/flash-put! :message "Bad password")
       (noir.response/redirect "/"))))
 
-(defn about-page []
-  (layout/render "about.html"))
-
 (defn begin-stats [user]
   {:user             user
    :you-judged-count (:judged (first (judge.db/you-judged-count judge.db/db-spec user)))
@@ -34,10 +32,11 @@
 
 (defn begin-page []
   (let [user (noir.session/get :user)
-        not-used (judge.db/unassign-judge-from-any-students! judge.db/db-spec user)]
+        not-used (judge.db/unassign-judge-from-any-students! judge.db/db-spec user)
+        ]
     (if (nil? user)
       (noir.response/redirect "/")
-      (layout/render "begin.html" (begin-stats user)))))
+      (layout/render-style "begin.html" (begin-stats user)))))
 
 
 (defn logout [where]
@@ -46,7 +45,7 @@
 
 (defn edit-judgements []
   (let [user (noir.session/get :user)]
-    (layout/render "edit-judgements.html"
+    (layout/render-style "edit-judgements.html"
                    {:judged (judge.db/you-judged judge.db/db-spec user)}
                    )))
 
@@ -66,6 +65,12 @@
     (noir.response/redirect "/begin")
     ))
 
+(defn style [args]
+  (println "setting style to" (:s args))
+  (noir.session/assoc-in! [:style] (:s args))
+  (noir.response/redirect "/begin")
+  )
+
 (defroutes home-routes
            (GET "/begin" [] (begin-page))
            (GET "/score-by-name" [name type] (score/scoring-page-by-name name type))
@@ -76,9 +81,9 @@
            (POST "/adjust-scores" [& x] (adjust-scores x))
            (POST "/" [judge-name password] (login-page judge-name password))
            (GET "/cancel" [& args] (judge.score/cancel args))
+           (GET "/style" [& args] (style args))
 
            (GET "/" [] (home-page))
-           (GET "/about" [] (about-page))
            (GET "/logout" [] (logout "/"))
 
            (GET "/a/login.html" req (ad/login req))

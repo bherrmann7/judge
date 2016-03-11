@@ -1,28 +1,18 @@
-<style>
-    TD,.cliff
-    {
-    font-family:sans-serif;
-    font-size:20pt;
-    padding: 4pt;
-    }
-</style>
 {% include "templates/style-choice.html" %}
 
-<font size="26">
-    <p >
 
-    Logged in as: {{user}} &nbsp;&nbsp;&nbsp;   <a id='logout' href="{{servlet-context}}/logout">Logout</a><p>
+<font >
+    <p>Logged in as: {{user}} &nbsp;&nbsp;&nbsp; <a id='logout' href="{{servlet-context}}/logout">Logout</a></p>
 
-    You have judged {{you-judged-count}} students. &nbsp;&nbsp;&nbsp;  <a href="edit-judgements">Edit</a>
 
-    <p>
+    You have judged {{you-judged-count}} students. &nbsp;  <a href="edit-judgements">Edit</a>
+    <br>
         You could judge as many as {{could-judge}} more.
-
-    <p>
-
+    <br>
+    <br>
     <form action="{{servlet-context}}/score" method="get">
         {% if could-judge > 0 %}
-        <input id="judge" style='font-size: 45' type="submit" value="Judge a Project"/>
+        <input id="judge" type="submit" value="Judge a Project"/>
         {% else %}
         {% if judging-finished %}
         <b>Judging for your grade has finished.</b>
@@ -31,10 +21,11 @@
         {% endif %}
         {% endif %}
     </form>
-    <div class="cliff">
+
+    <div>
         Current Grade {{stats.grade}} Overview
     </div>
-    <table >
+    <table>
         <tr>
             <td>Students
             <td>Checked In

@@ -46,8 +46,10 @@ ORDER BY
 select count(*) as judged from summary where judge = :judge;
 
 -- name: you-judged
-select student, score from summary where judge = :judge;
-
+select sm.student, s.partner, s.table_assignment, s.position, sm.score
+from summary sm
+join students s on sm.student = s.name
+where sm.judge = :judge;
 
 -- name: who-can-i-judge
 -- names of students who can I can judge next :judge judge

@@ -15,8 +15,8 @@
     (judge.db/assign-judge-to-student! judge.db/db-spec user (:name student-record))
     ;; if in K 1 2, they have a choice of project
     (if (some #(= (:grade student-record) %) ["K" "1" "2"])
-      (layout/render "unknown-project-type.html" student-record)
-      (layout/render "scoring.html" (conj {:project-type :experimental :criteria (judge.criteria/make-criteria false)} student-record)))))
+      (layout/render-style "unknown-project-type.html" student-record)
+      (layout/render-style "scoring.html" (conj {:project-type :experimental :criteria (judge.criteria/make-criteria false)} student-record)))))
 
 ;      (noir.response/redirect (str "/score-by-name?name=" (java.net.URLEncoder/encode (:name student-record)) "&type=e")))))
 
@@ -27,7 +27,7 @@
         project-type (if (= "i" type) :informational :experimental)
         criteria (judge.criteria/make-criteria (= "i" type))]
     ;  (clojure.pprint/pprint criteria)
-    (layout/render "scoring.html" (conj {:project-type project-type :criteria criteria} student-record))))
+    (layout/render-style "scoring.html" (conj {:project-type project-type :criteria criteria} student-record))))
 
 
 (defn unpack-score [score-raw]
@@ -102,7 +102,7 @@
         [total-score massaged-scores] (compute-final-summary scores-unpacked (= ":informational" (:project-type args)))
         formatted-total (format "%.3f" total-score)]
 
-    (layout/render "scoring-summary.html" (conj {:project-type (:project-type scores) :criteria massaged-scores :total-score formatted-total} student-record))))
+    (layout/render-style "scoring-summary.html" (conj {:project-type (:project-type scores) :criteria massaged-scores :total-score formatted-total} student-record))))
 
 
 (defn score-approved [args]
@@ -116,7 +116,7 @@
       (doall
        (judge.db/insert-scores! (:name args) judge score-list total-score)
        (noir.response/redirect "/begin"))
-      (layout/render "scoring-error.html"))))
+      (layout/render-style "scoring-error.html" {} ))))
 
 
 (defn cancel [args]

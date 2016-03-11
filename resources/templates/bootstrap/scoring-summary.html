@@ -1,0 +1,36 @@
+
+<span style="padding:20px;float: right">
+
+</span>
+
+        <h2>Summary</h2>
+        {% include "templates/stocktop.html" %}
+        <br>
+        <br>
+
+        <form action="{{servlet-context}}/score-approved" method="post">
+            <input type="hidden" name="name" value="{{name}}" />
+            <input type="hidden" name="project-type" value="{{project-type}}" />
+
+            <table>
+                {% for criterion in criteria %}
+                <tr>
+                    <input type="hidden" name="{{criterion.0}}" value="{{criterion.1}}" />
+                    <td>{{criterion.0}}</td>
+                    <td>{{criterion.1}}</td>
+                </tr>
+                {% endfor }}
+
+            </table>
+            <br>
+            You can use the back button and adjust scores if needed.<br>
+            <br>
+            Total Score: {{total-score}}
+            <br>
+
+            <br>
+            <input id="confirm" type="submit" value="Confirm"/>
+            &nbsp; &nbsp; <a href="{{servlet-context}}/cancel?n={{name}}">Cancel</a>
+            <br>
+        </form>
+        <br>

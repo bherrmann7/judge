@@ -124,7 +124,7 @@
                 {% else %}<br>
                 {% endifequal %}
 
-                <span class="scoringtext">
+                <label for="V{{criterion.1}}" class="scoringtext">
 
                         {% ifequal criterion.0 ":visual" %}
                            Visual
@@ -135,7 +135,7 @@
                         {% endifequal %}
 
                     {{criterion.1}}
-                </span>
+                </label>
                 {% ifequal criterion.0 ":score1-1.5" %}
                 {% with name=criterion.1 %}
                 {% include "templates/picker1.html" %}
@@ -147,9 +147,9 @@
                 {% endwith %}
                 {% else %}
                 {% ifequal criterion.0 ":visual" %}
-                <input type="checkbox" name="Visual {{criterion.1}}" value="1"/>
+                <input type="checkbox" id="V{{criterion.1}}" name="Visual {{criterion.1}}" value="1"/>
                 {% else %}
-                <input type="checkbox" name="Oral {{criterion.1}}" value="1"/>
+                <input type="checkbox" id="O{{criterion.1}}" name="Oral {{criterion.1}}" value="1"/>
                 {% endifequal %}
                 {% endifequal %}
                 {% endifequal %}

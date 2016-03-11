@@ -29,3 +29,12 @@
 (defn render [template & [params]]
   (RenderableTemplate. template params))
 
+(defn render-style [html-file attr-map]
+  (let [chosen-style (noir.session/get :style)]
+    (if (and (not (= html-file "home.html")) (= "plain" chosen-style))
+      (render (str "plain/" html-file) (assoc attr-map :style "plain"))
+    (if (and (not (= html-file "home.html")) (= "bootstrap" chosen-style))
+      (render (str "bootstrap/" html-file) (assoc attr-map :style "bootstrap"))
+      (render html-file attr-map)
+      ))
+    ))
