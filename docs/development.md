@@ -19,7 +19,14 @@ On ubuntu
 
 Creating the application schema
 
-    $ mysql -u dataBaseUser -p databasePassword < schema.sql
+   mysql> create user 'judge'@'localhost' IDENTIFIED BY 'buttercup';
+   Query OK, 0 rows affected (0.01 sec)
+
+   mysql> grant all PRIVILEGES on judge.* to 'judge'@'localhost';
+   Query OK, 0 rows affected (0.00 sec)
+
+
+   $  mysql -ujudge -pbuttercup < schema.sql
 
 ## Compile/Run
 
