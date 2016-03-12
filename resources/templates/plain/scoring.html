@@ -11,40 +11,43 @@
             <div >
                 {% for criterion in criteria %}
 
-                {% ifequal criterion.0 ":checkbox" %}
-                {% else %}<br>
-                {% endifequal %}
+                    {% ifequal criterion.0 ":checkbox" %}
+                    {% else %}<br>
+                    {% endifequal %}
 
 
-                {% ifequal criterion.0 ":score1-1.5" %}
-                {% with name=criterion.1 %}
-                {% include "templates/picker1.html" %}
-                {% endwith %}
-                {% else %}
-                {% ifequal criterion.0 ":score0-20" %}
-                {% with name=criterion.1 %}
-                {% include "templates/picker20.html" %}
-                {% endwith %}
-                {% else %}
-                {% ifequal criterion.0 ":visual" %}
-                <input type="checkbox" name="Visual {{criterion.1}}" value="1"/>
-                {% else %}
-                <input type="checkbox" name="Oral {{criterion.1}}" value="1"/>
-                {% endifequal %}
-                {% endifequal %}
-                {% endifequal %}
-
-                <label for="">
-
-                        {% ifequal criterion.0 ":visual" %}
-                           Visual
+                    {% ifequal criterion.0 ":score1-1.5" %}
+                        {% with name=criterion.1 %}
+                            {% include "templates/picker1.html" %}
+                        {% endwith %}
+                    {% else %}
+                        {% ifequal criterion.0 ":score0-20" %}
+                            {% with name=criterion.1 %}
+                                {% include "templates/picker20.html" %}
+                            {% endwith %}
                         {% else %}
-                            {% ifequal criterion.0 ":oral" %}
-                                Oral
+                            {% ifequal criterion.0 ":visual" %}
+                                <input type="checkbox" id="V{{criterion.1}}" name="Visual {{criterion.1}}" value="1"/>
+                                <label for="V{{criterion.1}}">
+                                    Visual
+                           {% else %}
+                                <input type="checkbox"  id="O{{criterion.1}}" name="Oral {{criterion.1}}" value="1"/>
+                                <label for="O{{criterion.1}}">
+                                    Oral
                             {% endifequal %}
                         {% endifequal %}
+                    {% endifequal %}
 
                     {{criterion.1}}
+
+                    {% ifequal criterion.0 ":visual" %}
+                       </label>
+                    {% else %}
+                        {% ifequal criterion.0 ":oral" %}
+                            </label>
+                        {% endifequal %}
+                    {% endifequal %}
+
                 </label>
                 <br>
 

@@ -1,5 +1,7 @@
+{% extends "templates/bootstrap/base.html" %}
+{% block content %}
 
-        <form id="scoring" action="{{servlet-context}}/scored" method="post" >
+<form id="scoring" action="{{servlet-context}}/scored" method="post" >
             {% include "templates/stocktop.html" %}
 
             <input type="hidden" name="name" value="{{name}}">
@@ -26,25 +28,28 @@
                 {% endwith %}
                 {% else %}
                 {% ifequal criterion.0 ":visual" %}
-                <input type="checkbox" name="Visual {{criterion.1}}" value="1"/>
-                {% else %}
-                <input type="checkbox" name="Oral {{criterion.1}}" value="1"/>
-                {% endifequal %}
-                {% endifequal %}
-                {% endifequal %}
-
-                  <span class="scoringtext">
-
-                        {% ifequal criterion.0 ":visual" %}
-                           Visual
-                        {% else %}
-                            {% ifequal criterion.0 ":oral" %}
-                                Oral
-                            {% endifequal %}
+                <input class="checkbox" type="checkbox" id="V{{criterion.1}}" name="Visual {{criterion.1}}" value="1"/>
+                <label for="V{{criterion.1}}">
+                    Visual
+                    {% else %}
+                    <input type="checkbox"  id="O{{criterion.1}}" name="Oral {{criterion.1}}" value="1"/>
+                    <label for="O{{criterion.1}}">
+                        Oral
+                        {% endifequal %}
+                        {% endifequal %}
                         {% endifequal %}
 
-                    {{criterion.1}}
-                </span>
+                        {{criterion.1}}
+
+                        {% ifequal criterion.0 ":visual" %}
+                    </label>
+                    {% else %}
+                    {% ifequal criterion.0 ":oral" %}
+                </label>
+                {% endifequal %}
+                {% endifequal %}
+
+                </label>
                 <br>
 
                 {% endfor %}
@@ -61,3 +66,5 @@
         </form>
     </font>
 </div>
+
+{% endblock %}

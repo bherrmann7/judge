@@ -1,3 +1,5 @@
+{% extends "templates/bootstrap/base.html" %}
+{% block content %}
 
 <span style="padding:20px;float: right">
 
@@ -30,7 +32,11 @@
 
             <br>
             <input id="confirm" type="submit" value="Confirm"/>
+            <!--
             &nbsp; &nbsp; <a href="{{servlet-context}}/cancel?n={{name}}">Cancel</a>
+            -->
             <br>
         </form>
         <br>
+
+{% endblock %}
