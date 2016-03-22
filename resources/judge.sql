@@ -173,7 +173,7 @@ insert into students values (:name, :table_assignment, :grade, :position, null, 
 insert into judges values (:name, :grade);
 
 -- name: students-not-checked-in
-select name, case when students.partner = ''  then
+select name, partner, case when students.partner = ''  then
      students.name
    else
      concat(students.name, ' / ' , students.partner)

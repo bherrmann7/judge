@@ -1,37 +1,39 @@
 {% extends "templates/bootstrap/base.html" %}
 {% block content %}
 
-<span style="padding:20px;float: right">
-
-</span>
 
         <h2>Summary</h2>
+<div class="row">
+    <div class="col-sm-4">
         {% include "templates/stocktop.html" %}
-        <br>
-        <br>
+    </div>
+</div>
+<p>
 
-        <form action="{{servlet-context}}/score-approved" method="post">
+        <form action="{{servlet-context}}/score-approved" method="post" class="col-sm-4">
             <input type="hidden" name="name" value="{{name}}" />
             <input type="hidden" name="project-type" value="{{project-type}}" />
 
-            <table>
+            <table class="table">
                 {% for criterion in criteria %}
                 <tr>
                     <input type="hidden" name="{{criterion.0}}" value="{{criterion.1}}" />
-                    <td>{{criterion.0}}</td>
+                    <td>{{criterion.0}}&nbsp;</td>
                     <td>{{criterion.1}}</td>
                 </tr>
                 {% endfor }}
+                <tr>
+                    <th>Total</th>
+                    <th>{{total-score}}</th>
+                </tr>
 
             </table>
-            <br>
-            You can use the back button and adjust scores if needed.<br>
-            <br>
-            Total Score: {{total-score}}
-            <br>
 
             <br>
-            <input id="confirm" type="submit" value="Confirm"/>
+
+            <button class="btn btn-default btn-lg" onclick="window.history.back()" type="submit">Edit</button>
+    &nbsp;&nbsp;
+    <button class="btn btn-primary btn-lg" id="confirm" type="submit">Save</button>
             <!--
             &nbsp; &nbsp; <a href="{{servlet-context}}/cancel?n={{name}}">Cancel</a>
             -->

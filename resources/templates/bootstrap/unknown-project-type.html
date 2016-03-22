@@ -1,0 +1,34 @@
+{% extends "templates/bootstrap/base.html" %}
+{% block content %}
+
+<br>
+
+<div class="row">
+    <div class="col-sm-12">
+        {% include "templates/stocktop.html" %}
+    </div>
+</div>
+
+<br>
+
+
+<div class="row">
+    <div class="col-sm-12">
+    <h2>What is the project type?</h2>
+    </div>
+</div>
+
+<br>
+
+
+<a class="btn btn-lg btn-primary"  href="{{servlet-context}}/score-by-name?name={{name}}&type=i">Informational</a>
+&nbsp;&nbsp;&nbsp;
+    <a class="btn btn-lg btn-primary" href="{{servlet-context}}/score-by-name?name={{name}}&type=e">Experimental</a>
+
+&nbsp;&nbsp;&nbsp;
+<a class="btn btn-default btn-lg" href="{{servlet-context}}/cancel?n={{name}}">Cancel</a>
+
+<p>
+
+</p></font>
+{% endblock %}

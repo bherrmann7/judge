@@ -1,54 +1,56 @@
-
 {% extends "templates/bootstrap/base.html" %}
 {% block content %}
 
-{% include "templates/style-choice.html" %}
+<div class="row">
+    <div class="col-xs-12">
 
+        {% include "templates/style-choice.html" %}
+        <p>
+        <p>
+            You are {{user}} &nbsp;&nbsp;&nbsp; <a id='logout'  class="btn btn-default"  href="{{servlet-context}}/logout">Logout</a>
+        <p>
+            You have judged {{you-judged-count}} students. &nbsp; <a class="btn btn-default"
+                                                                     href="edit-judgements">Edit</a>
+        <p>
+            You could judge as many as {{could-judge}} more.
+        <p>
+        <br>
+        <form action="{{servlet-context}}/score" method="get">
+            {% if could-judge > 0 %}
+            <button class="btn btn-default" id="judge" type="submit">Judge a Project</button>
+            {% else %}
+            {% if judging-finished %}
+            <b>Judging for your grade has finished.</b>
+            {% else %}
+            <button class="btn btn-default" href="{{servlet-context}}/begin">Check for Available Students</button>
+            {% endif %}
+            {% endif %}
+        </form>
+        <p>
+        <br>
 
-<font >
-    <p>Logged in as: {{user}} &nbsp;&nbsp;&nbsp; <a id='logout' href="{{servlet-context}}/logout">Logout</a></p>
-
-
-    You have judged {{you-judged-count}} students. &nbsp;  <a href="edit-judgements">Edit</a>
-    <br>
-        You could judge as many as {{could-judge}} more.
-    <br>
-    <br>
-    <form action="{{servlet-context}}/score" method="get">
-        {% if could-judge > 0 %}
-        <input id="judge" type="submit" value="Judge a Project"/>
-        {% else %}
-        {% if judging-finished %}
-        <b>Judging for your grade has finished.</b>
-        {% else %}
-        <a style='font-size: 45' href="{{servlet-context}}/begin">Check for Available Students</a>
-        {% endif %}
-        {% endif %}
-    </form>
-
-    <div>
-        Current Grade {{stats.grade}} Overview
+        <p>
+            Current Grade {{stats.grade}} Overview
+        <table class="table table-condensed table-bordered">
+            <tr>
+                <td>Students
+                <td>Checked In
+                <td>Not Judged
+                <td>Judged Once
+                <td>Judged Twice
+                <td>Judged Thrice
+            </tr>
+            <tr>
+                <td align="center">{{stats.total_students}}
+                <td align="center">{{stats.checked_in}}
+                <td align="center">{{stats.judged0}}
+                <td align="center">{{stats.judged1}}
+                <td align="center">{{stats.judged2}}
+                <td align="center">{{stats.judged3}}
+            </tr>
+        </table>
     </div>
-    <table>
-        <tr>
-            <td>Students
-            <td>Checked In
-            <td>Not Judged
-            <td>Judged Once
-            <td>Judged Twice
-            <td>Judged Thrice
-        </tr>
-        <tr>
-            <td align="center">{{stats.total_students}}
-            <td align="center">{{stats.checked_in}}
-            <td align="center">{{stats.judged0}}
-            <td align="center">{{stats.judged1}}
-            <td align="center">{{stats.judged2}}
-            <td align="center">{{stats.judged3}}
-        </tr>
-    </table>
-    </p>
 
-</font>
+</div>
 
 {% endblock %}

@@ -1,64 +1,110 @@
 {% extends "templates/bootstrap/base.html" %}
 {% block content %}
 
-<form id="scoring" action="{{servlet-context}}/scored" method="post" >
-            {% include "templates/stocktop.html" %}
+<div class="row">
+    <div class="col-sm-12">
+        {% include "templates/stocktop.html" %}
+    </div>
+</div>
 
-            <input type="hidden" name="name" value="{{name}}">
-            </input>
-            <input type="hidden" name="project-type" value="{{project-type}}">
-            </input>
+<form class="form-horizontal" id="scoring" action="{{servlet-context}}/scored" method="post" >
+    <input type="hidden" name="name" value="{{name}}">
+    </input>
+    <input type="hidden" name="project-type" value="{{project-type}}">
+    </input>
 
-            <div >
-                {% for criterion in criteria %}
+    {% for criterion in criteria %}
 
-                {% ifequal criterion.0 ":checkbox" %}
-                {% else %}<br>
-                {% endifequal %}
+    <div class="form-group">
 
+        {% ifequal criterion.0 ":score1-1.5" %}
+        <!-- 1.5 control -->
 
-                {% ifequal criterion.0 ":score1-1.5" %}
-                {% with name=criterion.1 %}
-                {% include "templates/picker1.html" %}
-                {% endwith %}
-                {% else %}
-                {% ifequal criterion.0 ":score0-20" %}
-                {% with name=criterion.1 %}
-                {% include "templates/picker20.html" %}
-                {% endwith %}
-                {% else %}
-                {% ifequal criterion.0 ":visual" %}
-                <input class="checkbox" type="checkbox" id="V{{criterion.1}}" name="Visual {{criterion.1}}" value="1"/>
-                <label for="V{{criterion.1}}">
-                    Visual
-                    {% else %}
-                    <input type="checkbox"  id="O{{criterion.1}}" name="Oral {{criterion.1}}" value="1"/>
-                    <label for="O{{criterion.1}}">
-                        Oral
-                        {% endifequal %}
-                        {% endifequal %}
-                        {% endifequal %}
+        <div class="col-sm-4">
+            <select id="{{criterion.1}}" name="{{criterion.1}}"  >
+                <option>1.00</option>
+                <option>1.10</option>
+                <option>1.20</option>
+                <option>1.30</option>
+                <option>1.40</option>
+                <option>1.50</option>
+            </select>
+            &nbsp;&nbsp;
+        <label for="{{criterion.1}}" class="control-label text-left ">
+        {{criterion.1}}
+        </label>
+            </div>
 
-                        {{criterion.1}}
+        {% endifequal %}
 
-                        {% ifequal criterion.0 ":visual" %}
-                    </label>
-                    {% else %}
-                    {% ifequal criterion.0 ":oral" %}
+        {% ifequal criterion.0 ":score0-20" %}
+        <!-- 0-20 control -->
+
+        <div class="col-sm-4">
+        <select name="{{criterion.1}}" id="{{criterion.1}}" >
+            <option> 0 </option>
+            <option> 1 </option>
+            <option> 2 </option>
+            <option> 3 </option>
+            <option> 4 </option>
+            <option> 5 </option>
+            <option> 6 </option>
+            <option> 7 </option>
+            <option> 8 </option>
+            <option> 9 </option>
+            <option> 10 </option>
+            <option> 11 </option>
+            <option> 12 </option>
+            <option> 13 </option>
+            <option> 14 </option>
+            <option> 15 </option>
+            <option> 16 </option>
+            <option> 17 </option>
+            <option> 18 </option>
+            <option> 19 </option>
+            <option> 20 </option>
+        </select>
+            &nbsp;&nbsp;
+
+             <label for="{{criterion.1}}" class="control-label">
+             {{criterion.1}}
+            </label>
+        </div>
+
+        {% endifequal %}
+
+        {% ifequal criterion.0 ":visual" %}
+        <!-- Visual Checkbox -->
+            <div class="checkbox col-sm-12">
+                <label >
+                <input   type="checkbox" id="V{{criterion.1}}" name="Visual {{criterion.1}}" value="1"/>
+                Visual
+                    {{criterion.1}}
                 </label>
-                {% endifequal %}
-                {% endifequal %}
+            </div>
+            {% endifequal %}
 
+        {% ifequal criterion.0 ":oral" %}
+        <!-- Oral Checkbox -->
+            <div class="checkbox  col-sm-12">
+                <label >
+                <input type="checkbox" id="O{{criterion.1}}" name="Oral {{criterion.1}}" value="1"/>
+                Oral
+                    {{criterion.1}}
                 </label>
-                <br>
+            </div>
+        {% endifequal %}
 
-                {% endfor %}
+     </div>
+
+
+    {% endfor %}
                 <p>
 
-                    <input id='submitscore' type="submit"
-                           value="Submit Scoring"/>
+                    <button class="btn btn-lg btn-primary" id='submitscore' type="submit">
+                           Submit Scoring</button>
                     &nbsp;&nbsp;&nbsp;
-        <a href="{{servlet-context}}/cancel?n={{name}}">Cancel</a>
+        <a class="btn btn-default btn-lg" href="{{servlet-context}}/cancel?n={{name}}">Cancel</a>
 
                 <p>
                 </p>

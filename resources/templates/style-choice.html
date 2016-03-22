@@ -1,5 +1,16 @@
 Style:
-{% ifequal style "" %} basic <a href="/style?s=plain">plain</a> <a
-        href="/style?s=bootstrap">bootstrap</a> {% endifequal %} {% ifequal style "plain" %} <a href="/style?s=basic">basic</a> plain
-<a href="/style?s=bootstrap">bootstrap</a> {% endifequal %} {% ifequal style "bootstrap" %}     <a
-        href="/style?s=basic">basic</a>     <a href="/style?s=plain">plain</a>     bootstrap {% endifequal %}
+{% ifequal style "" %}
+    basic
+    <!--<a href="/style?s=plain">plain</a>-->
+    <a href="/style?s=bootstrap">modern</a>
+{% endifequal %}
+<!--{% ifequal style "plain" %}-->
+   <!--<a href="/style?s=basic">basic</a>-->
+   <!--plain-->
+   <!--<a href="/style?s=bootstrap">bootstrap</a>-->
+<!--{% endifequal %}-->
+{% ifequal style "bootstrap" %}
+   <a href="/style?s=basic">basic</a>
+   <!--<a href="/style?s=plain">plain</a>-->
+   modern
+{% endifequal %}
