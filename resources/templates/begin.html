@@ -6,14 +6,15 @@
     padding: 4pt;
     }
 </style>
-{% include "templates/style-choice.html" %}
+<!-- include "templates/style-choice.html"  -->
 
 <font size="26">
     <p >
 
     Logged in as: {{user}} &nbsp;&nbsp;&nbsp;   <a id='logout' href="{{servlet-context}}/logout">Logout</a><p>
 
-    You have judged {{you-judged-count}} students. &nbsp;&nbsp;&nbsp;  <a href="edit-judgements">Edit</a>
+    You have judged {{you-judged-count}} students. &nbsp;&nbsp;&nbsp;
+    <!--<a href="edit-judgements">Edit</a>-->
 
     <p>
         You could judge as many as {{could-judge}} more.
@@ -34,7 +35,7 @@
     <div class="cliff">
         Current Grade {{stats.grade}} Overview
     </div>
-    <table >
+    <table border="1" >
         <tr>
             <td>Students
             <td>Checked In

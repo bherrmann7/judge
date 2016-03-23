@@ -91,7 +91,7 @@
     .scoringtext
     {
     /* Checkbox text */
-    font-size: 130%;
+    /*font-size: 130%;*/
     display: inline;
     padding: 20px;
     }
@@ -124,18 +124,23 @@
                 {% else %}<br>
                 {% endifequal %}
 
-                <label for="V{{criterion.1}}" class="scoringtext">
-
-                        {% ifequal criterion.0 ":visual" %}
+                    {% ifequal criterion.0 ":visual" %}
+                    <label for="V{{criterion.1}}" class="scoringtext">
                            Visual
                         {% else %}
                             {% ifequal criterion.0 ":oral" %}
+                    <label for="O{{criterion.1}}" class="scoringtext">
                                 Oral
                             {% endifequal %}
                         {% endifequal %}
 
-                    {{criterion.1}}
-                </label>
+                    {{criterion.1}}&nbsp;
+                        {% ifequal criterion.0 ":visual" %}
+                    </label>
+                        {% endifequal %}
+                        {% ifequal criterion.0 ":oral" %}
+                    </label>
+                {% endifequal %}
                 {% ifequal criterion.0 ":score1-1.5" %}
                 {% with name=criterion.1 %}
                 {% include "templates/picker1.html" %}
