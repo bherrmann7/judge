@@ -36,17 +36,18 @@
   (group-students students []))
 
 (defn reload-judges-students [req]
-
   (db/delete-from-students! db/db-spec)
   (db/delete-from-judges! db/db-spec)
   (db/delete-from-summary! db/db-spec)
   (db/delete-from-judgements! db/db-spec)
 
-  (let [students (rest (with-open [in-file (io/reader "/judge-data/students.csv")] (doall (csv/read-csv in-file))))
+  (let [students  (with-open [in-file (io/reader "/judge-data/students.csv")] (doall (csv/read-csv in-file)))
 ;        students-simpler (map #(vector (nth % 0) (.toUpperCase(nth % 3)) (nth % 1) (str (first (nth % 4))) (str (second (nth % 4))) ) students)]
-        students-simpler (map #(vector (nth % 0) (nth % 1) (nth % 2) (nth % 3) (nth % 4) ) students)]
+        ; 4,Zachary Cover,V,1,Matthew Heron
+        ; 0 1             2 3 4
+        students-simpler (map #(vector (nth % 1) (.toUpperCase (nth % 0)) (nth % 4) (nth % 2) (nth % 3) ) students)]
 
-    (doseq [[name grade partner table_assignment position ] (group-students-with-partners students-simpler)]
+    (doseq [[name grade partner table_assignment position ] students-simpler ];(group-students-with-partners students-simpler)]
       (prn  "name=" name "table=" table_assignment "grade= " grade "position=" position "partner=" partner  )
       (db/insert-student! db/db-spec name table_assignment grade position partner  )))
 
