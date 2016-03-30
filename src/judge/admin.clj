@@ -106,10 +106,10 @@
 
 (defn floor [req]
   (layout/render "/admin/floor.html" {:tables      {:row1
-                                                    [["X" "W"] ["V" "U"] ["T" "S"] ["R" "Q"] ["P" "O"] ["N" "M"]]
+                                                    [ #_["X" "W"] ["V" "U"] ["T" "S"] ["R" "Q"] ["P" "O"] ["N" "M"]]
                                                     :row2
-                                                    [["L" "K"] ["J" "I"] ["H" "G"] ["F" "E"] ["D" "C"] ["B" "A"]]}
-                                      :four-to-one (reverse (range 1 5))
+                                                    [ #_["L" "K"] ["J" "I"] ["H" "G"] ["F" "E"] ["D" "C"] ["B" "A"]]}
+                                      :four-to-one (reverse (range 1 7))
                                       :students    (judge.db/all-students-floor judge.db/db-spec)
                                       :judges      (judge.db/all-judges judge.db/db-spec)}))
 
