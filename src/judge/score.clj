@@ -12,11 +12,16 @@
   (let [user (noir.session/get :user)
         not-used (judge.db/unassign-judge-from-any-students! judge.db/db-spec user)
         student-record (first (shuffle (judge.db/who-can-i-judge judge.db/db-spec user)))]
-    (judge.db/assign-judge-to-student! judge.db/db-spec user (:name student-record))
-    ;; if in K 1 2, they have a choice of project
-    (if (some #(= (:grade student-record) %) ["K" "1" "2"])
-      (layout/render-style "unknown-project-type.html" student-record)
-      (layout/render-style "scoring.html" (conj {:project-type :experimental :criteria (judge.criteria/make-criteria false)} student-record)))))
+    (if (nil? student-record)
+      (noir.response/redirect "/begin")
+      (let [updated  (judge.db/assign-judge-to-student! judge.db/db-spec user (:name student-record))]
+        (println updated user "is judging" student-record)
+        (if (= 0 updated)
+          (noir.response/redirect "/begin")
+        ;; if in K 1 2, they have a choice of project
+          (if (some #(= (:grade student-record) %) ["K" "1" "2"])
+            (layout/render-style "unknown-project-type.html" student-record)
+            (layout/render-style "scoring.html" (conj {:project-type :experimental :criteria (judge.criteria/make-criteria false)} student-record))))))))
 
 ;      (noir.response/redirect (str "/score-by-name?name=" (java.net.URLEncoder/encode (:name student-record)) "&type=e")))))
 
@@ -114,10 +119,9 @@
         student-record (first (judge.db/get-student-by-name judge.db/db-spec (:name args)))]
     (if (= judge (:being_judged_by student-record))
       (doall
-       (judge.db/insert-scores! (:name args) judge score-list total-score)
-       (noir.response/redirect "/begin"))
-      (layout/render-style "scoring-error.html" {} ))))
-
+        (judge.db/insert-scores! (:name args) judge score-list total-score)
+        (noir.response/redirect "/begin"))
+      (layout/render-style "scoring-error.html" {:data (pr-str [:judge judge :args args :student-record student-record])}))))
 
 (defn cancel [args]
   (judge.db/assign-judge-to-student! judge.db/db-spec nil (:n args))

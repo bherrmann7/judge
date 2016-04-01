@@ -136,7 +136,7 @@ update summary set score=:score where student=:student and judge=:judge;
 select s.*, count(j.student) judgements from students s left outer join summary j on s.name = j.student where name = :name
 
 -- name: assign-judge-to-student!
-update students set being_judged_by=:judge where name=:student;
+update students set being_judged_by=:judge where name=:student and being_judged_by is null;
 
 -- name: unassign-judge-from-any-students!
 update students set being_judged_by=null, had_newbie_judge =
