@@ -27,6 +27,7 @@
                                        :checked-in-student      checked-in-student
                                        }))
   )
+
 (defn login-post [req]
   (let [password (str (:password (:params req)))]
     (if (= password site-pass)
@@ -119,7 +120,7 @@
         checked-in-student (first (judge.db/get-student-by-name judge.db/db-spec student-name))]
     (judge.db/checkin-student! judge.db/db-spec student-name)
     (noir.session/assoc-in! [:flash-student] checked-in-student)
-    (noir.response/redirect "/a")))
+    (noir.response/redirect "/a/checkin")))
 
 (defn awards-page [req]
   (let [highest-scores (judge.db/get-hightest judge.db/db-spec)
@@ -129,3 +130,11 @@
                                          :awards awards
                                          })))
 
+(defn checkin-page [req]
+  (let [checked-in-student (noir.session/get-in [:flash-student])]
+    (noir.session/assoc-in! [:flash-student] nil)
+    (layout/render "/admin/checkin.html" {
+                                       :students-not-checked-in (judge.db/students-not-checked-in judge.db/db-spec)
+                                       :checked-in-student      checked-in-student
+                                       }))
+  )

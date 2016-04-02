@@ -92,6 +92,7 @@
 
            ; This checking really shoud be done in the middle where on uri /a and /a/*
            (GET "/a" req (ad/admin-check ad/admin-page req))
+           (GET "/a/checkin" req (ad/admin-check ad/checkin-page req))
            (GET "/a/judges" req (ad/admin-check ad/judges-page req))
            (GET "/a/students" req (ad/admin-check ad/students-page req))
            (GET "/a/judgements" req (ad/admin-check ad/judgements-page req))
