@@ -36,11 +36,11 @@ LEFT JOIN
     summary
 ON
     students.name = summary.student
+WHERE students.checked_in is not null
 GROUP BY
     students.name
 ORDER BY
     judged;
-
 
 -- name: you-judged-count
 select count(*) as judged from summary where judge = :judge;
