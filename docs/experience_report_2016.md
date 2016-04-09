@@ -64,22 +64,22 @@ Some issues during actual judging at the fair.
 shuffled randomly (using clojure's shuffle method.)   In practice this didn't seem to work so well.   Some of the
 projects didn't seem to be judged at all until the surrounding projects were completely judged.    This was pretty
 awkward because students neighbors could have been fully judged without a single judge visiting the effected student.
-In particular two students did not appear to get any judges until the very end,
+In particular two students did not appear to get any judges until the very end.
 
 ACTION: investigate the shuffle and/or use a weighted random process.
 
 ACTION: Consider a judge override - which would let a judge specifically jump to a specific student.  We trust the
-judges.   They can do this be constantly pressing cancel .. but the seems barbaric.
+judges.   They already can do this by constantly pressing cancel .. but that just seems barbaric.
 
 2. On the judging screen, partner names were missing.
 
 I do not know how this got missed.   Carl said it was a problem last year too.    I took a look at the code and fixed
-the proble in about 10 minutes time.    This stunk because it meant judges had to remember to ask if there were two
+the problem.    This stunk because it meant judges had to remember to ask if there were two
 students.
 
 ACTION: none - this issue is fixed.  Perhaps test more?
 
-Judge balancing (spreading judges evenly so all grades finish in nearly the same time, could have been better.)
+3. Judge balancing (spreading judges evenly so all grades finish in nearly the same time, could have been better.)
 We waited a while for 4th grade to finish.
 
 ACTION: Spread judges across more evenly based on the number of students per grade.   This was a little tricky
