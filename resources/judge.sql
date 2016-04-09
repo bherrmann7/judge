@@ -1,6 +1,7 @@
 
 -- name: all-judges
-select * from (SELECT j.*, s.name judging FROM judges j left join students s on j.name = s.being_judged_by) x group by name, grade;
+select * from (SELECT j.*, s.name judging FROM judges j left join students s on j.name = s.being_judged_by) x
+ group by name, grade;
 
 -- name: all-students
 SELECT * FROM students;
@@ -58,7 +59,8 @@ SELECT
    table_assignment,
    grade,
    position,
-   judgements
+   judgements,
+   partner
 FROM
    (
       SELECT

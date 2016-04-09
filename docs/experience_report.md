@@ -2,7 +2,7 @@
 
 # An Experience Report
 
-On Saturday, March 28th, the Judge application was used by the Groton Dunstable Elementary School's Science Fair team
+On Saturday, March 28th, 2015 the Judge application was used by the Groton Dunstable Elementary School's Science Fair team
 to judge.  More details about the fair and its information and rules are at http://gdesciencefair.org
 I, Bob Herrmann, am the developer for the judge application and was responsible for ensuring it ran correctly on the
 day of the fair.
