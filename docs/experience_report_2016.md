@@ -66,29 +66,24 @@ projects didn't seem to be judged at all until the surrounding projects were com
 awkward because students neighbors could have been fully judged without a single judge visiting the effected student.
 In particular two students did not appear to get any judges until the very end.
 
-ACTION: investigate the shuffle and/or use a weighted random process.
+  ACTION: investigate the shuffle and/or use a weighted random process.
 
-ACTION: Consider a judge override - which would let a judge specifically jump to a specific student.  We trust the
-judges.   They already can do this by constantly pressing cancel .. but that just seems barbaric.
+  ACTION: Consider a judge override - which would let a judge specifically jump to a specific student.  We trust the judges.   They already can do this by constantly pressing cancel .. but that just seems barbaric.
 
 2. On the judging screen, partner names were missing.
 
-I do not know how this got missed.   Carl said it was a problem last year too.    I took a look at the code and fixed
-the problem.    This stunk because it meant judges had to remember to ask if there were two
-students.
+  I do not know how this got missed.   Carl said it was a problem last year too.    I took a look at the code and fixed the problem.    This stunk because it meant judges had to remember to ask if there were two students.
 
-ACTION: none - this issue is fixed.  Perhaps test more?
+  ACTION: none - this issue is fixed.  Perhaps test more?
 
 3. Judge balancing (spreading judges evenly so all grades finish in nearly the same time, could have been better.)
 We waited a while for 4th grade to finish.
 
-ACTION: Spread judges across more evenly based on the number of students per grade.   This was a little tricky
-as some judges had last minute cancellations.
+  ACTION: Spread judges across more evenly based on the number of students per grade.   This was a little tricky as some judges had last minute cancellations.
 
-ACTION: For post analysis, would be nice if the judging app recorded times that judges started and stopped with
-each project
+  ACTION: For post analysis, would be nice if the judging app recorded times that judges started and stopped with each project
 
-ACTION: Would be nice if awards page showed that all judging was complete per grade.
+  ACTION: Would be nice if awards page showed that all judging was complete per grade.
 
 
 ## The Setup Used
