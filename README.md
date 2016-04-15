@@ -14,7 +14,7 @@ Other [Docs](docs/)
 
 See the [Experience Report for 2016](experience_report_2016.md)
 
-See the [Experience Report for 2015](experience_report.md) for 2015
+See the [Experience Report for 2015](experience_report.md)
 
 ## License
 
